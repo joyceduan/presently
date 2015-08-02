@@ -65,7 +65,7 @@
       22 Friends
     </a>
     </div>
-			
+	</div> </div>
 		<div class="six wide column"></div>
 		<div class="one wide column"></div>
 		<div class="sixteen wide column"></div>
@@ -103,12 +103,12 @@
 			//alert(myUser)
 			var dataValue;
 			username = $('#ProfileName').val();
-    		alert(username);
+    		//(username);
     		myDataRef.once("value", function(snapshot){
     			var data = snapshot.child(username);
     			dataValue = data.val();
    	        console.log(dataValue);
-    		alert(dataValue.password);
+    		//alert(dataValue.password);
     		 document.getElementById('myLikes').innerHTML = "Personality Tags:" + dataValue.likes;
     		 document.getElementById("profilepic").src = dataValue.profilepicURL;
     		})

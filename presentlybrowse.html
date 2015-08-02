@@ -57,15 +57,16 @@
       <img src="http://ecx.images-amazon.com/images/I/51hgkNew%2BXL._SY344_BO1,204,203,200_.jpg">
     </div>
     <div class="content">
-      <a class="header">John Green's YA Novel Paper Towns</a>
+      <a class="header" id = "itemTitle">John Green's Paper Towns</a>
       <div class="meta">
-        <span>Now a national best-seller and major motion picture</span>
+        <span>Now a national best-seller YA Novel and major motion picture</span>
       </div>
+      <button onClick = "addtoLike()"> Like </button>
       <div class="description">
         <p></p>
       </div>
       <div class="extra">
-        <a href="" $25.00 ></a>
+        <a href="http://www.amazon.com/Paper-Towns-John-Green/dp/014241493X" id = "price" >$25.00 </a>
       </div>
     </div>
   </div>
@@ -116,5 +117,23 @@
 		}
 		</style>
     </body>
+
+     <script language="javascript" type="text/javascript">
+      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
+      function addtoLike()
+      {
+        var objectName = $('#itemTitle').innerHTML;
+        var objectPrice = $('#price').innerHTML;
+
+        var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
+     
+        var userRef = myDataRef.child("Object");
+
+        userRef.set({Name: objectName, 
+              price: objectPrice,
+              });
+        alert("Item Liked!");
+      }
+    </script>
   
 </html>

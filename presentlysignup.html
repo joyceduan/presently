@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<link rel="icon" type="image/jpeg" href="presentlylogo.jpg" />
+
+ 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="/semantic/out/semantic.js"></script>
+		<script src="/semantic/out/semantic.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="/semantic/out/semantic.css">	
+		<link rel="stylesheet" type="text/css" href="/semantic/out/semantic.min.css">
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	</head>
+		<div class="ui grid">
+			<div class="sixteen wide column"></div>
+			<div class="fifteen wide column"></div>
+			<img class="ui medium rounded image" src="presentlylogo.jpg" style="width:80px; height:50px">
+		</div>
+		<div class="ui secondary pointing menu">
+			  <a class = "item" href = "presentlyprofile.html" >
+			    Profile
+			  </a>
+			  <a class="item" href = "presentlybrowse.html"  >
+			    Browse
+			  </a>
+			  <a class="item" href = "presentlyevents.html">
+			    Events
+			  </a>
+			  <a class="ui item" align = "right" href = "presentlylogin.html" >
+			  	Logout
+			  </a>
+			</div>
+
+
+
+			
+			<p><br><br><br><br></p>
+			<div class="ui large header" style ="text-align:center"><font color="white" face ="verdana"><b>Create New Account:</b></font></div></h1>
+			<div class="ui input"><input type="text" Id= "username" placeholder="Username"></div>
+			<br>
+			<div class="ui input"><input type="password" Id = "password" placeholder="Password"></div>
+			<br><br>
+			<div class="ui action input">
+			<input type="text" placeholder="Enter Profile Picture URL!" id = "pfpURL">
+  			<button class="ui button">Submit</button>
+			</div>
+			<br>
+			<div class="ui right labeled left icon input">
+ 			 <i class="tags icon"></i>
+  			<input id = "personalityTags"type="text" placeholder="Describe yourself!">
+  			<a class="ui tag label">
+   			 Enter Personality/Gift Tags 
+  			</a>
+  			<br><br>
+		</div>
+<br></br>
+
+			<button class="large ui blue button" onClick = "makeUser()"><a href= "file:///C:/Users/John/Documents/presentlyprofile.html" ><font color="white">Sign Up</font></a></button></div>
+		</div>
+    </body>
+    <body>
+    	
+			
+    	<style type="text/css">
+			body {
+			background: coral;
+			text-align: center;
+		}
+		</style>
+    </body>
+    <script language="javascript" type="text/javascript">
+    	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
+    	function makeUser()
+    	{
+    		var username = $('#username').val();
+    		var password = $('#password').val();
+    		var meTags = $('#personalityTags').val();
+    		var pfpPath = $('#pfpURL').val();
+    		meTagsArray = meTags.split(' ');
+
+    		var userRef = myDataRef.child(username);
+
+    		userRef.set({password:password, 
+    					likes: meTagsArray,
+    					profilepicURL: pfpPath});
+
+
+    		window.location.href ="C:/Users/John/Documents/presentlyprofile.html";
+       	}
+    </script>
+</html>

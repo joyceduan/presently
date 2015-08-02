@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<link rel="icon" type="image/jpeg" href="presentlylogo.jpg" />
+
+ 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="/semantic/out/semantic.js"></script>
+		<script src="/semantic/out/semantic.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="/semantic/out/semantic.css">	
+		<link rel="stylesheet" type="text/css" href="=/semantic/out/semantic.min.css">
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+
+	</head>
+	<body>
+		<div class="ui grid">
+			<div class="sixteen wide column"></div>
+			<div class="fifteen wide column"></div>
+			<img class="ui medium rounded image" src="presentlylogo.jpg" style="width:80px; height:50px">
+		</div>
+		
+			<p><br><br><br><br><br><br><br><br></p>
+			<div class="ui large header" style ="text-align:center"><font color="white" face ="verdana"><b>Log In</b></font></div></h1>
+			<div class="ui input"><input type="text" Id= "username" placeholder="Username"></div>
+			<br>
+			<div class="ui input"><input type="password" Id = "password" placeholder="Password"></div>
+			<br><br>
+			<button class="large ui blue button" onClick = "logIn()"><font color="white">Log In</font></button></div>
+
+		</div>
+    </body>
+    <body>
+    	<style type="text/css">
+			body {
+			background: coral;
+			text-align: center;
+		}
+		</style>
+    </body>
+    <script language="javascript" type="text/javascript">
+    	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
+    	function logIn()
+    	{
+    		//var username = $('#username').value;
+    		//var currentUser = myDataRef.child(username)
+    		//console.log(currentUser)
+    		window.location.href ="C:/Users/John/Documents/presentlyprofile.html"
+    	}
+    </script>
+</html>

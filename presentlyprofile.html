@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<link rel="icon" type="image/jpeg" href="presentlylogo.jpg" />
+
+ 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="/semantic/out/semantic.js"></script>
+		<script src="/semantic/out/semantic.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="/semantic/out/semantic.css">	
+		<link rel="stylesheet" type="text/css" href="/semantic/out/semantic.min.css">
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	</head>
+		<div class="ui grid">
+			<div class="sixteen wide column"></div>
+			<div class="fifteen wide column"></div>
+			<img class="ui medium rounded image" src="presentlylogo.jpg" style="width:80px; height:50px">
+		</div>
+		
+			<div class="ui secondary pointing menu">
+			  <a class = "item" href = "presentlyprofile.html" >
+			    Profile
+			  </a>
+			  <a class="item" href = "presentlybrowse.html"  >
+			    Browse
+			  </a>
+			  <a class="item" href = "presentlyevents.html">
+			    Events
+			  </a>
+			  <a class="ui item" align = "right" href = "presentlylogin.html" >
+			  	Logout
+			  </a>
+			  <a class="ui item" align = "right" href = "presentlysignup.html" >
+			  	Make New Profile
+			  </a>
+			</div>
+
+
+			</div>
+			<body>
+			<div class="ui grid">
+		<div class="six wide column"></div>
+		<div class="ui card">
+  <div class="image" >
+    <img src="C:\Users\John\Documents\pfp.jpg" id = "profilepic">
+  </div>
+  <div class="content">
+  	<div class="ui form">
+  <div class="field" >
+    <label>Enter Username: </label>
+    <input type="text" id = "ProfileName">
+   </div>
+   <button id = "refreshButton" onClick = "listUsername()"> Generate User Profile </button>
+  </div>
+    <div class="meta">
+      <span class="date">Joined in 2015</span>
+    </div>
+  </div>
+  <div class="extra content">
+    <a>
+      <i class="user icon"></i>
+      22 Friends
+    </a>
+  
+</div>
+
+</div>
+			
+		<div class="six wide column"></div>
+		<div class="one wide column"></div>
+		<div class="sixteen wide column"></div>
+		<div class="one wide column"></div>
+		<div class = "ui large header" id = "myLikes">Personality Tags</div>
+
+		<div class="ui large header"><font color="white" face ="verdana"><b>Gifts I Like:</b></font></div>
+		<div class="one wide column"></div>
+		<img class="ui medium rounded image" src="C:\Users\John\Documents\hp.jpg" style="width:182px; height:182px">
+		<div class="one wide column"></div>
+		<img class="ui medium rounded image" src="C:\Users\John\Documents\necklace.jpg" style="width:182px; height:182px">
+		<div class="one wide column"></div>
+		<img class="ui medium rounded image" src="C:\Users\John\Documents\shirt.jpg" style="width:182px; height:182px">
+		<div class="four wide column"></div>
+		<div class="four wide column"></div>
+		<div class="four wide column"></div>
+		<div class="four wide column"></div>
+		</div>
+    </body>
+    <body>
+    	<style type="text/css">
+			body {
+			background: coral;s
+			font-color: white;
+		}
+		</style>
+    </body>
+    <script language="javascript" type="text/javascript">
+    	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
+    	function listUsername()
+	{       
+			//myStorage = localStorage
+			//var myUser = myStorage.getItem('username')
+			//alert(myUser)
+			var dataValue;
+			username = $('#ProfileName').val();
+    		alert(username);
+    		myDataRef.once("value", function(snapshot){
+    			var data = snapshot.child(username);
+    			dataValue = data.val();
+   	        console.log(dataValue);
+    		alert(dataValue.password);
+    		 document.getElementById('myLikes').innerHTML = "Personality Tags:" + dataValue.likes;
+    		 document.getElementById("profilepic").src = dataValue.profilepicURL;
+    		})
+    		
+   	        
+       	}
+    </script>
+</html>

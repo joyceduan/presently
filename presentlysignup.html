@@ -82,7 +82,7 @@
     		var pfpPath = $('#pfpURL').val();
     		meTagsArray = meTags.split(' ');
 
-    		var userRef = myDataRef.child(username);
+    		var userRef = myDataRef.child("Users").child(username);
 
     		userRef.set({password:password, 
     					likes: meTagsArray,

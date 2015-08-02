@@ -119,20 +119,18 @@
     </body>
 
      <script language="javascript" type="text/javascript">
-      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
+      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com');
       function addtoLike()
       {
         var objectName = $('#itemTitle').innerHTML;
         var objectPrice = $('#price').innerHTML;
-
-        var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
      
         var userRef = myDataRef.child("Object");
-
+        alert("Item Liked!");
         userRef.set({Name: objectName, 
               price: objectPrice,
               });
-        alert("Item Liked!");
+        
       }
     </script>
   

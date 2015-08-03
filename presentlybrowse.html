@@ -123,10 +123,10 @@
       var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
       function addtoLike()
       {
-        var objectName = $('#itemTitle').innerHTML;
-        var objectPrice = $('#price').innerHTML;
-        var objectLink = $('#link').innerHTML;
-        alert("Item Liked!" + objectName);
+        var objectName = document.getElementById('itemTitle').innerHTML;
+        var objectPrice = document.getElementById('price').innerHTML;
+        var objectLink =  $('#link').attr("href");
+        alert("Item Liked!");
         var objRef = myDataRef.child(objectName);
 
         

@@ -20,7 +20,6 @@
 		<div class="ui grid">
 			<div class="sixteen wide column"></div>
 			<div class="fifteen wide column"></div>
-			<img class="ui medium rounded image" src="presentlylogo.jpg" style="width:80px; height:50px">
 		</div>
 		
 			<p><br><br><br><br><br><br><br><br></p>
@@ -53,7 +52,8 @@
          }
     	}
     	function logIn()
-    	{   username = $('#username').val();
+    	{   alert("hello");
+    		username = $('#username').val();
     	    alert("yoooo" + username);
     	    usersDataRef.child(username).once('value', 
     	    	function(snapshot) {

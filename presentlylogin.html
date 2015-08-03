@@ -42,13 +42,15 @@
     </body>
     <script language="javascript" type="text/javascript">
     	var usersDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
+
     	function userExistsCallback(userId, exists){
          if(exists){
-         	alert('User' + userId + "exists!")
-         	window.location.href ="presentlyprofile.html"
+         	alert('User' + userId + " exists!")
+         	window.location.href ="presentlyprofile.html";
          }
          else{
          	alert("User " + userId + " does not exist.")
+         	
          }
     	}
     	function logIn()
@@ -56,10 +58,10 @@
     		username = $('#username').val();
     	    usersDataRef.child(username).once('value', 
     	    	function(snapshot) {
-    	    	alert(snapshot.val())
+    	    	alert(snapshot.val());
 
     			var exists = (snapshot.val() !== null);
-   				 userExistsCallback(userId, exists);
+   				 userExistsCallback(username, exists);
   				});
     	    	
     		//var username = $('#username').value;

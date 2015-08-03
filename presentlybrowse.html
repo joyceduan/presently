@@ -126,8 +126,10 @@
         var objectName = $('#itemTitle').innerHTML;
         var objectPrice = $('#price').innerHTML;
         var objectLink = $('#link').innerHTML;
-     
+        var userRef = myDataRef.child("Users").child(objectName);
+     alert("Item Liked!");
        var userRef = myDataRef.child("Object").child(objectName);
+
         alert("Item Liked!");
         userRef.set({
               price: objectPrice,

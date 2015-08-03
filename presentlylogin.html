@@ -52,11 +52,11 @@
          }
     	}
     	function logIn()
-    	{   alert("hello");
+    	{   
     		username = $('#username').val();
-    	    alert("yoooo" + username);
     	    usersDataRef.child(username).once('value', 
     	    	function(snapshot) {
+    	    	alert('You made it')
     			var exists = (snapshot.val() !== null);
    				 userExistsCallback(userId, exists);
   				});

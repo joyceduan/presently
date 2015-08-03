@@ -66,7 +66,8 @@
         <p></p>
       </div>
       <div class="extra">
-        <a href="http://www.amazon.com/Paper-Towns-John-Green/dp/014241493X" id = "price" >$25.00 </a>
+        <p id = "price" >$25.00 </p>
+        <a href="http://www.amazon.com/Paper-Towns-John-Green/dp/014241493X" id = "link"> Shop Now </a>
       </div>
     </div>
   </div>
@@ -124,11 +125,14 @@
       {
         var objectName = $('#itemTitle').innerHTML;
         var objectPrice = $('#price').innerHTML;
+        var objectLink = $('#link').innerHTML;
      
-        var userRef = myDataRef.child("Object");
+       var userRef = myDataRef.child("Object").child(objectName);
         alert("Item Liked!");
-        userRef.set({Name: objectName, 
+        userRef.set({
               price: objectPrice,
+              link: objectLink
+              tags: []
               });
         
       }

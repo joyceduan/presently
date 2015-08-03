@@ -26,11 +26,10 @@
 		</div>
 		<p><br><br><br><br></p>
 		<div class = "ui huge header"><font color="white" face ="verdana"  ><b>presently</b></font></div>
-		<div class="ui inverted segment">
-			<button class="ui inverted button "><a href="presentlylogin.html">Log In</a></button>
+			<button class="ui inverted button" onClick = "openLogin()" >Log In</a></button>
 
-			<button class="ui inverted button"><a href="presentlysignup.html">Sign Up</a></button>
-		</div>
+			<button class="ui inverted button" onClick = "openSignUp()">Sign Up</a></button>
+		
 		</div>
     </body>
     <body>
@@ -45,12 +44,12 @@
     	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
     	function openLogin()
     	{
-
+			window.location.href ="presentlylogin.html"
     	}
 
     	function openSignUp()
     	{
-
+			window.location.href ="presentlysignup.html"
     	}
     </script>
 </html>

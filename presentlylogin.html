@@ -56,7 +56,8 @@
     		username = $('#username').val();
     	    usersDataRef.child(username).once('value', 
     	    	function(snapshot) {
-    	    	alert('You made it')
+    	    	alert(snapshot.val())
+
     			var exists = (snapshot.val() !== null);
    				 userExistsCallback(userId, exists);
   				});

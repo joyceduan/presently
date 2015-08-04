@@ -72,7 +72,7 @@
 		<div class="one wide column"></div>
 		<div class="ui large header" id = "myLikes" align = "Center">Personality Tags</div>
 		<div class="ten wide column"></div>
-
+		<div class="four wide column"></div>
 		<div class="ui large header"><font color="white" face ="verdana" align = "center"><b>Gifts I Like:</b></font></div>
 		<div class="one wide column"></div>
 		<img class="ui medium rounded image" src="C:\Users\John\Documents\hp.jpg" style="width:182px; height:182px">
@@ -96,28 +96,21 @@
     </body>
     <script language="javascript" type="text/javascript">
     	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
+    	var username = localStorage.getItem("username");
     	
-    	//var start = document.cookie.indexOf('username'); //Get the location of the cookie value
-    	//var stop = document.cookie.indexOf(';'); //Get the end of the cookie value
-      
-     //Return the value of the cookie (+5 because 'snum:' is 5 chars long)
+    	
     	function listUsername()
-	{       alert("hiya");
-			//myStorage = localStorage
-			//var myUser = myStorage.getItem('username')
-			//alert(myUser)
+	{       
 			var dataValue;
-			//username = $('#ProfileName').val();
-    		//(username);
-    		var username = localStorage.getItem("username");
-    		alert(username);
-    		myDataRef.once("value", function(snapshot){
+			myDataRef.once("value", function(snapshot){
     			var data = snapshot.child(username);
     			dataValue = data.val();
    	        console.log(dataValue);
-    		//alert(dataValue.password);
+    		
     		 document.getElementById('myLikes').innerHTML = "Personality Tags:" + dataValue.likes;
     		 document.getElementById("profilepic").src = dataValue.profilepicURL;
+    		 document.getElementById("ProfileName").innerHTML = username;
+
     		})
     		
    	        

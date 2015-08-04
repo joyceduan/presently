@@ -44,7 +44,7 @@
 		</div>
 <br></br>
 
-			<button class= "ui green button " onClick = "makeUser()">Sign Up!</a></button></div>
+			<button class= "ui green button " onClick = "makeUser()">Sign Up</a></button></div>
 			<br><br>
 			<button class= "ui blue button " onClick = "logIn()">Log In</a></button></div>
 
@@ -77,8 +77,10 @@
     		var userRef = myDataRef.child("Users").child(username);
 
     		userRef.set({password:password, 
-    					likes: myTagsArray,
-    					profilepicURL: pfpPath});
+    			    	likes: myTagsArray,
+    				profilepicURL: pfpPath,
+    				items: ""			
+    		});
 
     		localStorage.setItem("username", username);
     		window.location.href ="presentlyprofile.html";

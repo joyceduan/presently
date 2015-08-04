@@ -67,6 +67,7 @@
     	function logIn()
     	{   
     		username = $('#username').val();
+    		username = username.replace(/\s/g, '');
     		alert(username);
     	    usersDataRef.child(username).once('value', 
     	    	function(snapshot) {

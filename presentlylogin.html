@@ -29,7 +29,7 @@
 			<div class="ui input"><input type="password" Id = "password" placeholder="Password"></div>
 			<br><br>
 			<button class="large ui blue button" onClick = "logIn()"><font color="white">Log In</button></div>
-			<br> <br><br><br>
+			<br> <br>
 			<button class="large ui green button"  onClick = "register()"> Sign Up</font></a></button>
 
 		</div>
@@ -47,7 +47,6 @@
 
     	function loginCallback(username, exists, rightPassword){
          if(exists){
-         	alert('User ' + username + " exists!");
          	if(rightPassword){
          		localStorage.setItem("username", username);
          		window.location.href = "presentlyprofile.html";

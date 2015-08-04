@@ -71,11 +71,11 @@
 		<div class="four wide column"></div>
 		
 		<div class="one wide column"></div>
-		<!img class="ui medium rounded image" src="C:\Users\John\Documents\hp.jpg" style="width:182px; height:182px">
+		<!img class="ui medium rounded image" src="hp.jpg" style="width:182px; height:182px">
 		<div class="one wide column"></div>
-		<!img class="ui medium rounded image" src="C:\Users\John\Documents\necklace.jpg" style="width:182px; height:182px">
+		<!img class="ui medium rounded image" src="necklace.jpg" style="width:182px; height:182px">
 		<div class="one wide column"></div>
-		<!img class="ui medium rounded image" src="C:\Users\John\Documents\shirt.jpg" style="width:182px; height:182px">
+		<!img class="ui medium rounded image" src="shirt.jpg" style="width:182px; height:182px">
 		<div class="four wide column"></div>
 		<div class="four wide column"></div>
 		<div class="four wide column"></div>
@@ -99,7 +99,7 @@
     			var data = snapshot.child(username);
     			userData = data.val();
    	        	console.log(userData);
-    		 	document.getElementById('personalityTags').innerHTML = "Personality Tags:" + userData.likes;
+    		 	document.getElementById('personalityTags').innerHTML = "Personality Tags: " + userData.likes;
     		 	if(userData.profilepicURL !== ""){
     		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	
     		 	}

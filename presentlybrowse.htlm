@@ -127,13 +127,18 @@
         var objectLink =  $('#link').attr("href");
         alert("Item Liked!");
         var objRef = myDataRef.child(objectName);
-
+	var username = localStorage.getItem("username");
+	alert(username);
         
         objRef.set({
               price: objectPrice,
               link: objectLink,
               tags: []
               });
+      
+       userRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
+       userRef.child(username).update({items:objectName});
+       
         
       }
     </script>

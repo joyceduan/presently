@@ -103,13 +103,15 @@
 
     return document.cookie.substring(start+5, stop); //Return the value of the cookie (+5 because 'snum:' is 5 chars long)
     	function listUsername()
-	{       
+	{       alert("hiya");
 			//myStorage = localStorage
 			//var myUser = myStorage.getItem('username')
 			//alert(myUser)
 			var dataValue;
-			username = $('#ProfileName').val();
+			//username = $('#ProfileName').val();
     		//(username);
+    		var username = localStorage.getItem("username");
+    		alert(username);
     		myDataRef.once("value", function(snapshot){
     			var data = snapshot.child(username);
     			dataValue = data.val();

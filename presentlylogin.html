@@ -38,6 +38,7 @@
 			background: coral;
 			text-align: center;
 		}
+		
 		</style>
     </body>
     <script language="javascript" type="text/javascript">
@@ -65,9 +66,7 @@
     		alert(username);
     	    usersDataRef.child(username).once('value', 
     	    	function(snapshot) {
-    	    		alert("hiya");
     	    		data = snapshot.val();
-    	    		alert(data);
 					var exists = (data !== null);
     				if(exists){
     					var enteredPass = $('#password').val();

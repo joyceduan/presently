@@ -30,10 +30,10 @@
 			  <a class="item" href = "presentlyevents.html">
 			    Events
 			  </a>
-			  <a class="ui item" align = "right" href = "presentlysignup.html" >
+			  <a class="item"  href = "presentlysignup.html" >
 			  	Make New Profile
 			  </a>
-			  <a class="ui item" align = "right" href = "presentlylogin.html" >
+			  <a class="item"  href = "presentlylogin.html" >
 			  	Logout
 			  </a>
 			</div>
@@ -56,13 +56,13 @@
  			 <i class="tags icon"></i>
   			<input id = "personalityTags"type="text" placeholder="Describe yourself!">
   			<a class="ui tag label">
-   			 Enter Personality/Gift Tags 
+   			 Enter Personality Tags 
   			</a>
   			<br><br>
 		</div>
 <br></br>
 
-			<button class= "ui inverted button active" onClick = "makeUser()"><a href= "presentlyprofile.html" >Sign Up</a></button></div>
+			<button class= "ui inverted button active" onClick = "makeUser()">Sign Up</a></button></div>
 		</div>
     </body>
     <body>
@@ -83,16 +83,16 @@
     		var password = $('#password').val();
     		var meTags = $('#personalityTags').val();
     		var pfpPath = $('#pfpURL').val();
-    		meTagsArray = meTags.split(' ');
+    		myTagsArray = meTags.split(' ');
 
     		var userRef = myDataRef.child("Users").child(username);
 
     		userRef.set({password:password, 
-    					likes: meTagsArray,
+    					likes: myTagsArray,
     					profilepicURL: pfpPath});
 
-
-    		window.location.href ="C:/Users/John/Documents/presentlyprofile.html";
+    		localStorage.setItem("username", username);
+    		window.location.href ="presentlyprofile.html";
        	}
     </script>
 </html>

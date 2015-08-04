@@ -44,7 +44,10 @@
 		</div>
 <br></br>
 
-			<button class= "ui inverted button active" onClick = "makeUser()">Sign Up</a></button></div>
+			<button class= "ui green button " onClick = "makeUser()">Sign Up!</a></button></div>
+			<br><br><br><br>
+			<button class= "ui blue button " onClick = "logIn()">Log In</a></button></div>
+
 		</div>
  	
     	<style type="text/css">
@@ -56,6 +59,12 @@
     </body>
     <script language="javascript" type="text/javascript">
     	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
+    	
+    	function logIn()
+    	{
+    		window.location.href ="presentlylogin.html";
+    	}
+
     	function makeUser()
     	{
     		var username = $('#username').val();

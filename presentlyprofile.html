@@ -98,23 +98,22 @@
     <script language="javascript" type="text/javascript">
     	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
     	var username = localStorage.getItem("username");
-    	
+    	var userData;
+		myDataRef.once("value", function(snapshot)
+		{
+    			var data = snapshot.child(username);
+    			userData = data.val();
+   	        	console.log(dataValue);
+    		
+    		 	document.getElementById('myLikes').innerHTML = "Personality Tags:" + userData.likes;
+    		 	document.getElementById("profilepic").src = userData.profilepicURL;
+    		 	document.getElementById("ProfileName").innerHTML = username;
+
+    		});
     	
     	function listUsername()
-	{       
-			var dataValue;
-			myDataRef.once("value", function(snapshot){
-    			var data = snapshot.child(username);
-    			dataValue = data.val();
-   	        console.log(dataValue);
-    		
-    		 document.getElementById('myLikes').innerHTML = "Personality Tags:" + dataValue.likes;
-    		 document.getElementById("profilepic").src = dataValue.profilepicURL;
-    		 document.getElementById("ProfileName").innerHTML = username;
-
-    		})
-    		
-   	        
-       	}
+		{       
+			alert('hi!');
+    	}
     </script>
 </html>

@@ -39,20 +39,19 @@
 		</div>
 			<body>
 			<div class="ui grid">
-		 <div class="eight wide column"></div>
+		 <div class="eight wide column">
+		 <div class="ui large header"><font color="white" face ="verdana" align = "center"><b>Gifts I Like:</b></div>
+		 <br> <br> <br>  <br>
+		 <div class="ui large header" id = "personalityTags"><b>Personality Tags:</b></font></div>
+		</div>
 		<div class="ui card">
   <div class="image">
-    <img src="C:\Users\John\Documents\pfp.jpg" id = "profilepic">
+    <img src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic">
   </div>
   <div class="content">
-  	<div class="ui form">
-  <div class="field" >
-    <label>Enter Username: </label>
-    <input type="text" id = "ProfileName">
-   </div>
+  	<a class="header" id = "displayUserName">User </a>
     <div class="meta">
       <span class="date">Joined in 2015</span>
-    </div>
   </div>
   <div class="extra content">
     <a>
@@ -65,10 +64,10 @@
 		<div class="one wide column"></div>
 		<div class="sixteen wide column"></div>
 		<div class="one wide column"></div>
-		<div class="ui large header" id = "myLikes" align = "Center">Personality Tags</div>
+		
 		<div class="ten wide column"></div>
 		<div class="four wide column"></div>
-		<div class="ui large header"><font color="white" face ="verdana" align = "center"><b>Gifts I Like:</b></font></div>
+		
 		<div class="one wide column"></div>
 		<!img class="ui medium rounded image" src="C:\Users\John\Documents\hp.jpg" style="width:182px; height:182px">
 		<div class="one wide column"></div>
@@ -98,14 +97,12 @@
     			var data = snapshot.child(username);
     			userData = data.val();
    	        	console.log(userData);
-    		
-    		 	document.getElementById('myLikes').innerHTML = "Personality Tags:" + userData.likes;
-    		 	if(userData.profilepicURL == ""){
-    		 		document.getElementById("profilepic").src = "http://skiuwi.com/Skiuwi/img/GenericUser.png"
+    			document.getElementById('displayUserName').innerHTML = username;
+    		 	document.getElementById('personalityTags').innerHTML = "Personality Tags:" + userData.likes;
+    		 	if(userData.profilepicURL !== ""){
+    		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	
     		 	}
-    		 	else{
-    		 	document.getElementById("profilepic").src = userData.profilepicURL;
-    		 }
+    		 
     		});
     	
     </script>

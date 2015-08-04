@@ -91,13 +91,12 @@
     <script language="javascript" type="text/javascript">
     	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
     	var username = localStorage.getItem("username");
-    	document.getElementById("ProfileName").innerHTML = username;
+    	document.getElementById("displayUserName").innerHTML = username;
     	var userData;
 		myDataRef.once("value", function(snapshot){
     			var data = snapshot.child(username);
     			userData = data.val();
    	        	console.log(userData);
-    			document.getElementById('displayUserName').innerHTML = username;
     		 	document.getElementById('personalityTags').innerHTML = "Personality Tags:" + userData.likes;
     		 	if(userData.profilepicURL !== ""){
     		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	

@@ -29,6 +29,7 @@
 			<div class="ui input"><input type="password" Id = "password" placeholder="Password"></div>
 			<br><br>
 			<button class="large ui blue button" onClick = "logIn()"><font color="white">Log In</font></button></div>
+			<button class="large ui green button"  onClick = "register()"> Sign Up</a></button>
 
 		</div>
     </body>
@@ -38,7 +39,7 @@
 			background: coral;
 			text-align: center;
 		}
-		
+
 		</style>
     </body>
     <script language="javascript" type="text/javascript">
@@ -60,6 +61,9 @@
          	
          }
     	}
+    	function register(){
+    		window.location.href = "presentlysignup.html";
+    	}
     	function logIn()
     	{   
     		username = $('#username').val();
@@ -77,9 +81,7 @@
    				 	else{
    				 		loginCallback(username, exists, false);
   					}
-  				});
-    	    
-    		
+  				});	
     	}
     </script>
 </html>

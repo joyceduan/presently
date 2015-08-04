@@ -62,12 +62,13 @@
     	function logIn()
     	{   
     		username = $('#username').val();
+    		alert(username);
     	    usersDataRef.child(username).once('value', 
     	    	function(snapshot) {
+    	    		alert("hiya");
     	    		data = snapshot.val();
     	    		alert(data);
-
-    				var exists = (data !== null);
+					var exists = (data !== null);
     				if(exists){
     					var enteredPass = $('#password').val();
     					var rightPassword = (data.password == enteredPass);
@@ -77,11 +78,8 @@
    				 	else{
    				 		loginCallback(username, exists, false);
   					}
-  				};
-    	    	
-    		//var username = $('#username').value;
-    		//var currentUser = myDataRef.child(username)
-    		//console.log(currentUser)
+  				});
+    	    
     		
     	}
     </script>

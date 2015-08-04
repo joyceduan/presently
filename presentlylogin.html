@@ -43,13 +43,16 @@
     <script language="javascript" type="text/javascript">
     	var usersDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
 
-    	function userExistsCallback(userId, exists){
+    	function userExistsCallback(username, exists){
          if(exists){
-         	alert('User' + userId + " exists!")
-         	window.location.href ="presentlyprofile.html";
+         	alert('User' + username + " exists!");
+         	urlWithUser = "presentlyprofile.html?username="+ username;
+         	alert(urlWithUser);
+         	localStorage.setItem("username", username);
+         	window.location.href = urlWithUser;
          }
          else{
-         	alert("User " + userId + " does not exist.")
+         	alert("User " + username + " does not exist.")
          	
          }
     	}

@@ -48,7 +48,7 @@
 		</div>
 		<div class="ui card">
   <div class="image">
-    <img src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic" style="width:350px; height:400px">
+    <img src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic" style="width:350px; height:450px">
   </div>
   <div class="content">
   	<a class="header" id = "displayUserName">User </a>
@@ -100,6 +100,7 @@
     			userData = data.val();
    	        	console.log(userData);
     		 	document.getElementById('personalityTags').innerHTML = "Personality Tags: " + userData.likes;
+    		 	document.getElementById('giftsILike').innerHTML = "Gifts I Like " + userData.items;
     		 	if(userData.profilepicURL !== ""){
     		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	
     		 	}

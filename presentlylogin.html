@@ -29,7 +29,7 @@
 			<br><br>
 			<button class="large ui blue button" onClick = "logIn()"><font color="white">Log In</button></div>
 			<br> <br>
-			<button class="large ui green button"  onClick = "register()"> Sign Up</font></a></button>
+			<button class="large ui green button" id = "signUpButton" onClick = "register()"> Sign Up</font></a></button>
 
 		</div>
    
@@ -43,7 +43,10 @@
     </body>
     <script language="javascript" type="text/javascript">
     	var usersDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
-
+        function flipButton(){
+        $('.signUpButton')
+        .transition('vertical flip');
+        }
     	function loginCallback(username, exists, rightPassword){
          if(exists){
          	if(rightPassword){
@@ -60,6 +63,7 @@
          }
     	}
     	function register(){
+            //flipButton();
     		window.location.href = "presentlysignup.html";
     	}
     	function logIn()

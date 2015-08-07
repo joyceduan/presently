@@ -41,15 +41,16 @@
 			<div class="ui grid">
 		 <div class="eight wide column">
 		 	<div class = "two wide column"></div>
-		 <div class="ui large header" id = "giftsILike"><font color="white" face ="verdana" align = "center"><b>Gifts I Like:</b></font></div>
+		 	<font color="white" face ="verdana" align = "center">
+		 <div class="ui large header" id = "giftsILike"><b>Gifts I Like:</b></font></div>
 		 <br> <br> <br>  <br>
 		 <div class = "two wide column"></div>
-		 <div class="ui large header" id = "personalityTags"><font color = "white" face = "verdana"><b>Personality Tags:</b></font></div>
+		 <div class="ui large header" id = "personalityTags"><b>Personality Tags:</b></div>
+		</font>
 		</div>
 		<div class="ui card">
-  <div class="image">
-    <img src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic" style="width:350px; height:450px">
-  </div>
+
+   <img class = "ui medium circular image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic">
   <div class="content">
   	<a class="header" id = "displayUserName">User </a>
     <div class="meta">
@@ -98,12 +99,29 @@
 		myDataRef.once("value", function(snapshot){
     			var data = snapshot.child(username);
     			userData = data.val();
+    			pTags = userData.likes;
    	        	console.log(userData);
-    		 	document.getElementById('personalityTags').innerHTML = "Personality Tags: " + userData.likes;
-    		 	document.getElementById('giftsILike').innerHTML = "Gifts I Like " + userData.items;
+    		 	//document.getElementById('personalityTags').innerHTML = "Personality Tags: " + userData.likes;
+    		 	document.getElementById('personalityTags').style.color = '#FFFFFF'
+    		 	document.getElementById('giftsILike').style.color = '#FFFFFF'
+    		 	document.getElementById('giftsILike').innerHTML = "Gifts I Like: " + userData.items;
     		 	if(userData.profilepicURL !== ""){
     		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	
     		 	}
+
+    		 	var tagLinks = document.createElement("p");
+    		 	for (item in userData.likes){
+    		 		var x = document.createElement("a");
+    		 		x.innerHTML = pTags[item];
+    		 		x.setAttribute("href", "http://google.com");
+    		 		//Eventually use presently.html$attribute so links automatically to that page, extract from substring ?=
+    		 		tagLinks.appendChild(x);
+    		 		tagLinks.appendChild(document.createElement("br"));
+ 					
+    		 	}
+    		 	document.getElementById("personalityTags").appendChild(tagLinks); 
+    		 	alert("hoo");
+
     		 
     		});
 		// alert('hello');

@@ -41,7 +41,7 @@
 			<div class="ui grid">
 		 <div class="eight wide column">
 		 	<div class = "two wide column"></div>
-		 <div class="ui large header"><font color="white" face ="verdana" align = "center"><b>Gifts I Like:</b></font></div>
+		 <div class="ui large header" id = "giftsILike"><font color="white" face ="verdana" align = "center"><b>Gifts I Like:</b></font></div>
 		 <br> <br> <br>  <br>
 		 <div class = "two wide column"></div>
 		 <div class="ui large header" id = "personalityTags"><font color = "white" face = "verdana"><b>Personality Tags:</b></font></div>
@@ -105,6 +105,13 @@
     		 	}
     		 
     		});
-    	
+		alert('hello')
+		var newDiv = document.createElement("img");
+		//newDiv.setAttribute('id',);
+		newDiv.setAttribute("src","http://blog.cashcrate.com/wp-content/uploads/2014/08/Taco.png");
+		alert('hello');
+		document.getElementbyId('giftsILike').appendChild(newDiv);
+		alert(userData.items));
+		
     </script>
 </html>

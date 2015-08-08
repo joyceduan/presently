@@ -95,7 +95,7 @@
               alert(data);
               inDataBase = (data !== null);
               if(!inDataBase){
-                 objDataRef.child(objName).push({ link: objLink,
+                 objDataRef.child(objName).set({ link: objLink,
                                 price:objPrice,
                                 tags: objTags});
             }

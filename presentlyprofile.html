@@ -43,7 +43,7 @@
 		 	<div class = "two wide column"></div>
 		 	<font color="white" face ="verdana" align = "center">
 		 <div class="ui large header" id = "giftsILike"><b>Gifts I Like:</b></font></div>
-		 <p id = "sameTagFriends"> Similar Tags </p>
+		 <p id = "sameTagFriends"> People with similar personalities: </p>
 		 <br> <br> <br>  <br>
 		 <div class = "two wide column"></div>
 		 <div class="ui large header" id = "personalityTags"><b>Personality Tags:</b></div>
@@ -124,15 +124,15 @@
     		 	document.getElementById("personalityTags").appendChild(tagLinks); 
     		 	snapshot.forEach(function(childSnapshot) {
    
-    	var key = childSnapshot.key();
-    	// childData will be the actual contents of the child
+    	var key = childSnapshot.key(); // key = username
     	var childData = childSnapshot.val();
-    	childLikes = childData.likes;
+    	var childLikes = childData.likes;
+    	var added = [];
     	for(i = 0; i < childLikes.length; i++){
-    		var oneLike = childLikes[i];
-    		//alert(oneLike);
-    		if(pTags.indexOf(oneLike) != -1 && key != username){
-    			document.getElementById("sameTagFriends").innerHTML += key;
+    		var theirLike = childLikes[i];
+    		if(pTags.indexOf(theirLike) != -1 && key != username && added.indexOf(key) == -1){
+    			added.push(key);
+    			document.getElementById("sameTagFriends").innerHTML += ('<b>' + key + '</b>');
     		}
     	}
     });

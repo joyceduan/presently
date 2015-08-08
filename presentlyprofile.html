@@ -43,6 +43,7 @@
 		 	<div class = "two wide column"></div>
 		 	<font color="white" face ="verdana" align = "center">
 		 <div class="ui large header" id = "giftsILike"><b>Gifts I Like:</b></font></div>
+		 <p id = "sameTagFriends"> Similar Tags </p>
 		 <br> <br> <br>  <br>
 		 <div class = "two wide column"></div>
 		 <div class="ui large header" id = "personalityTags"><b>Personality Tags:</b></div>
@@ -114,18 +115,29 @@
     		        tag = pTags[item];
     		 		var x = document.createElement("a");
     		 		x.innerHTML = tag;
-    		 		tagPage = 'presentlyTagPage.html/?tag='+tag;
+    		 		tagPage = 'presentlyTagPage.html?tag='+tag;
     		 		x.setAttribute("href", tagPage);
-    		 		//Eventually use presently.html$attribute so links automatically to that page, extract from substring ?=
     		 		tagLinks.appendChild(x);
     		 		tagLinks.appendChild(document.createElement("br"));
  					
     		 	}
     		 	document.getElementById("personalityTags").appendChild(tagLinks); 
-    		 	alert("hoo");
-
-    		 
-    		});
+    		 	snapshot.forEach(function(childSnapshot) {
+   
+    	var key = childSnapshot.key();
+    	// childData will be the actual contents of the child
+    	var childData = childSnapshot.val();
+    	childLikes = childData.likes;
+    	for(i = 0; i < childLikes.length; i++){
+    		var oneLike = childLikes[i];
+    		//alert(oneLike);
+    		if(pTags.indexOf(oneLike) != -1 && key != username){
+    			document.getElementById("sameTagFriends").innerHTML += key;
+    		}
+    	}
+    });
+		});
+	
 		// alert('hello');
 		// var newDiv = document.createElement("img");
 		// //newDiv.setAttribute('id',);

@@ -17,7 +17,17 @@
     </head>
     <body>
  	
-    <p> Hello Tagpage!</p>
+      <div class="card">
+    <div class="image">
+      <img id = "image1">
+    </div>
+    <div class="content">
+      <div class="header">Item Name </div>
+      <div class="meta">
+        <a id = "purchaseLink">Purchase Link </a>
+      </div>
+    </div>
+  </div>
 			
 		<style type="text/css">
 			body {
@@ -33,28 +43,34 @@
     </body>
 
      <script language="javascript" type="text/javascript">
-      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
-      function addtoLike()
-      {
-        var objectName = document.getElementById('itemTitle').innerHTML;
-        var objectPrice = document.getElementById('price').innerHTML;
-        var objectLink =  $('#link').attr("href");
-        alert("Item Liked!");
-        var objRef = myDataRef.child(objectName);
-	var username = localStorage.getItem("username");
-	alert(username);
-        
-        objRef.set({
-              price: objectPrice,
-              link: objectLink,
-              tags: []
-              });
       
-       userRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
-       userRef.child(username).update({items:objectName});
-       
-        
-      }
+
+      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
+        var url = document.URL;
+        varDict = getVarDict(url);
+        alert(varDict["tag"]);
+
+
+      function getVarDict(url){
+        var start = url.indexOf('?');
+        var varDict = {};
+
+        var urlVarString = url.substring(start + 1, url.length);
+        var varPairs = urlVarString.split('&');
+        for(x = 0; x < varPairs.length; x++){
+          str = varPairs[x];
+          pairArray = str.split('=');
+          key = pairArray[0];
+          value = pairArray[1];
+          varDict[key] = value;
+         }
+         return(varDict);
+       }
+
+      //   myDataRef.once("value", function(snapshot){
+      //     var data = snapshot.child(tag);
+      //     userData = data.val();
+ 
     </script>
   
 </html>

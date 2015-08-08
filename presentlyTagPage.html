@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+        <link rel="icon" type="image/png" href="presently.png" />
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="semantic/out/semantic.js"></script>
+        <script src="semantic/out/semantic.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="semantic/out/semantic.css">    
+        <link rel="stylesheet" type="text/css" href="semantic/out/semantic.min.css">
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    </head>
+    <body>
+ 	
+    <p> Hello Tagpage!</p>
+			
+		<style type="text/css">
+			body {
+			background: coral;
+			text-align: center;
+      font-color: white;
+      font-size: 20px;
+
+
+		}
+		</style>
+
+    </body>
+
+     <script language="javascript" type="text/javascript">
+      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
+      function addtoLike()
+      {
+        var objectName = document.getElementById('itemTitle').innerHTML;
+        var objectPrice = document.getElementById('price').innerHTML;
+        var objectLink =  $('#link').attr("href");
+        alert("Item Liked!");
+        var objRef = myDataRef.child(objectName);
+	var username = localStorage.getItem("username");
+	alert(username);
+        
+        objRef.set({
+              price: objectPrice,
+              link: objectLink,
+              tags: []
+              });
+      
+       userRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
+       userRef.child(username).update({items:objectName});
+       
+        
+      }
+    </script>
+  
+</html>

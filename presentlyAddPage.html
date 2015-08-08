@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+        <link rel="icon" type="image/png" href="presently.png" />
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="semantic/out/semantic.js"></script>
+        <script src="semantic/out/semantic.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="semantic/out/semantic.css">    
+        <link rel="stylesheet" type="text/css" href="semantic/out/semantic.min.css">
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    </head>
+    <body>
+      <br><br>
+      <h1 class="ui grey header">Add an Item to the Presently Database:</h1>
+      <br><br>
+      <div class="ui input" >
+        <input type="text" placeholder="Object Name:" id = "objName">
+      </div>
+      <br><br>
+      <div class="ui input" >
+        <input type="text" placeholder="Link to purchase" id = "objLink">
+      </div>
+      <br><br>
+      <div class="ui left action input">
+        <button class="ui teal labeled icon button">
+          <i class="dollar icon"></i>
+          Item Price
+        </button>
+        <input type="text" value="" id = "objPrice">
+      </div>
+      <br><br>
+      <div class="ui right labeled left icon input">
+         <i class="tags icon"></i>
+        <input type="text" placeholder="Enter description tags" id = "objTags">
+        <a class="ui tag label" >
+          Add Tags
+        </a>
+      </div>
+      <br><br>
+      <div class="ui green animated fade button" tabindex="0" onClick = "addItem()">
+        <div class="visible content">Add New Item</div>
+        <div class="hidden content">
+         Submit
+        </div>
+      </div>
+      <br><br><br><br>
+      <a class="ui button" href = "presentlybrowse.html">
+        Back to Browsing
+      </button>
+
+   
+      
+    <style type="text/css">
+      body {
+      background: coral;
+      text-align: center;
+      font-color: white;
+      font-size: 20px;
+
+
+    }
+    h1{color: white;
+    }
+
+    </style>
+
+    </body>
+
+     <script language="javascript" type="text/javascript">
+      
+
+      var objDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
+      
+      function addItem(){
+      
+        var inDataBase = false;
+        var objName = $('#objName').val();
+        alert('o' + objName);
+        var objLink = $('#objLink').val();
+        var objTagVal = $('#objTags').val();
+        var objTags = objTagVal.split(' ');
+        var objPrice = $('#objPrice').val();
+        objDataRef.child(objName).once('value', 
+            
+            function(snapshot) {
+
+              data = snapshot.val();
+              alert(data);
+              inDataBase = (data !== null);
+              if(!inDataBase){
+                 objDataRef.child(objName).push({ link: objLink,
+                                price:objPrice,
+                                tags: objTags});
+            }
+          }
+          );
+      alert('Item Added!');
+    }
+
+
+
+ 
+    </script>
+  
+</html>

@@ -39,31 +39,36 @@
 		</div>
 			<body>
 			<div class="ui grid">
-		 <div class="eight wide column">
+		 
 		 	<div class = "two wide column"></div>
+		 	<div class = "six wide column">
+		 	<br><br><br>
 		 	<font color="white" face ="verdana" align = "center">
-		 <div class="ui large header" id = "giftsILike"><b>Gifts I Like:</b></font></div>
-		 <p id = "sameTagFriends"> People with similar personalities: </p>
-		 <br> <br> <br>  <br>
+		 <div class="ui large header" id = "giftsILike"><u>Gifts I Like:</u></font></div>
+		 <br><br>
+		 <p id = "sameTagFriends"><font size="5"><b><u>People with similar personalities: </u></b></font></p>
+		 <br> <br>
 		 <div class = "two wide column"></div>
-		 <div class="ui large header" id = "personalityTags"><b>Personality Tags:</b></div>
+		 <div class="ui large header" id = "personalityTags"><b><u>Personality Tags:</u></b></div>
 		</font>
 		</div>
+
 		<div class="ui card">
 
-   <img class = "ui medium circular image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic">
-  <div class="content">
-  	<a class="header" id = "displayUserName">User </a>
-    <div class="meta">
-      <span class="date">Joined in 2015</span>
-  </div>
-  <div class="extra content">
-    <a>
-      <i class="user icon"></i>
-      22 Friends
-    </a>
-    </div>
-	</div> </div>
+   		<img class = "ui medium circular image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic">
+  		<div class="content">
+  		<a class="header" id = "displayUserName">User </a>
+    	<div class="meta">
+      	<span class="date">Joined in 2015</span>
+  		</div>
+  		<div class="extra content">
+    		<a>
+      		<i class="user icon"></i>
+      		22 Friends
+    		</a>
+    	</div>
+		</div> 
+		</div>
 		<div class="six wide column"></div>
 		<div class="one wide column"></div>
 		<div class="sixteen wide column"></div>
@@ -73,21 +78,16 @@
 		<div class="four wide column"></div>
 		
 		<div class="one wide column"></div>
-		<!img class="ui medium rounded image" src="hp.jpg" style="width:182px; height:182px">
-		<div class="one wide column"></div>
-		<!img class="ui medium rounded image" src="necklace.jpg" style="width:182px; height:182px">
-		<div class="one wide column"></div>
-		<!img class="ui medium rounded image" src="shirt.jpg" style="width:182px; height:182px">
 		<div class="four wide column"></div>
-		<div class="four wide column"></div>
-		<div class="four wide column"></div>
-		<div class="four wide column"></div>
-		</div>
+		
+		
     
     	<style type="text/css">
 			body {
 			background: coral;
 			font-color: white;
+			color:white;
+			
 		}
 
 		</style>
@@ -105,7 +105,7 @@
     		 	//document.getElementById('personalityTags').innerHTML = "Personality Tags: " + userData.likes;
     		 	document.getElementById('personalityTags').style.color = '#FFFFFF'
     		 	document.getElementById('giftsILike').style.color = '#FFFFFF'
-    		 	document.getElementById('giftsILike').innerHTML = "Gifts I Like: " + userData.items;
+    		 	document.getElementById('giftsILike').innerHTML += ('<br>' + userData.items);
     		 	if(userData.profilepicURL !== ""){
     		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	
     		 	}
@@ -118,23 +118,27 @@
     		 		tagPage = 'presentlyTagPage.html?tag='+tag;
     		 		x.setAttribute("href", tagPage);
     		 		tagLinks.appendChild(x);
-    		 		tagLinks.appendChild(document.createElement("br"));
+    		 		tagLinks.appendChild(document.createTextNode(", "));
  					
     		 	}
+
     		 	document.getElementById("personalityTags").appendChild(tagLinks); 
+    		 	document.getElementById("sameTagFriends").innerHTML += '<br></br>'
     		 	snapshot.forEach(function(childSnapshot) {
    
     	var key = childSnapshot.key(); // key = username
     	var childData = childSnapshot.val();
     	var childLikes = childData.likes;
     	var added = [];
+  
     	for(i = 0; i < childLikes.length; i++){
     		var theirLike = childLikes[i];
     		if(pTags.indexOf(theirLike) != -1 && key != username && added.indexOf(key) == -1){
     			added.push(key);
-    			document.getElementById("sameTagFriends").innerHTML += ('<b>' + key + '</b>');
+    			document.getElementById("sameTagFriends").innerHTML += ('<b>' + key );
     		}
     	}
+    	
     });
 		});
 	

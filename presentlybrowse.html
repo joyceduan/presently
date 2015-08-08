@@ -59,7 +59,12 @@
   <i class="star icon"></i>
   Click on an item to "like" it, and tap the link to navigate to purchase it. 
 </div> 
-
+<div class="ui animated button" tabindex="0" id = "addThings" onClick = "goToAddPage()">
+  <div class="visible content">Help us out: Enter An Item in the Database</div>
+  <div class="hidden content">
+    <i class="right arrow icon"></i>
+  </div>
+</div>
 <div class="ui items">
   <div class="item">
     <div class="ui small image">
@@ -129,27 +134,32 @@
     </body>
 
      <script language="javascript" type="text/javascript">
-      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
-      function addtoLike()
-      {
+      var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com');
+     
+      function addtoLike(){
         var objectName = document.getElementById('itemTitle').innerHTML;
         var objectPrice = document.getElementById('price').innerHTML;
         var objectLink =  $('#link').attr("href");
         alert("Item Liked!");
-        var objRef = myDataRef.child(objectName);
-	var username = localStorage.getItem("username");
-	alert(username);
-        
-        objRef.set({
+
+        var myObjectRef = myDataRef.child('Objects');
+        var thisObjRef = myObjectRef.child(objectName);
+	      var username = localStorage.getItem("username");
+
+         thisObjRef.set({
               price: objectPrice,
               link: objectLink,
               tags: []
               });
+        alert('w');
       
-       userRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
+       userRef = myDataRef.child('Users');
        userRef.child(username).update({items:objectName});
-       
-        
+       alert(objectName);
+
+      }
+      function goToAddPage(){
+        window.location.href ="presentlyAddPage.html";
       }
     </script>
   

@@ -80,7 +80,30 @@
 
      <script language="javascript" type="text/javascript">
       var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com');
-     
+        var url = document.URL;
+        varDict = getVarDict(url);  //parses the url for variables
+        alert(varDict["tag"]); 
+        
+      function getVarDict(url){
+        var start = url.indexOf('?');
+        var varDict = {};
+        var urlVarString = url.substring(start + 1, url.length);
+        var varPairs = urlVarString.split('&');
+        for(x = 0; x < varPairs.length; x++){
+          str = varPairs[x];
+          pairArray = str.split('=');
+          key = pairArray[0];
+          value = pairArray[1];
+          varDict[key] = value;
+         }
+         return(varDict);
+       }
+      
+      
+      
+      
+      
+      
       function addtoLike(){
         var objectName = document.getElementById('itemTitle').innerHTML;
         var objectPrice = document.getElementById('price').innerHTML;

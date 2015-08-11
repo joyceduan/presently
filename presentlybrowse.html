@@ -81,7 +81,8 @@
      <script language="javascript" type="text/javascript">
       var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com');
         var url = document.URL;
-        varDict = getVarDict(url);  //parses the url for variables
+        var varDict = getVarDict(url); //parses the url for variables
+        alert('cow');
         alert(varDict["tag"]); 
         
       function getVarDict(url){
@@ -98,11 +99,6 @@
          }
          return(varDict);
        }
-      
-      
-      
-      
-      
       
       function addtoLike(){
         var objectName = document.getElementById('itemTitle').innerHTML;
@@ -126,6 +122,7 @@
        alert(objectName);
 
       }
+      
       function goToAddPage(){
         window.location.href ="presentlyAddPage.html";
       }

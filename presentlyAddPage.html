@@ -28,6 +28,10 @@
         <input type="text" placeholder="Link to purchase" id = "objLink">
       </div>
       <br><br>
+      <div class="ui input" >
+        <input type="text" placeholder="Image Link" id = "imageLink">
+      </div>
+      <br><br>
       <div class="ui left action input">
         <button class="ui teal labeled icon button">
           <i class="dollar icon"></i>
@@ -82,8 +86,8 @@
       
         var inDataBase = false;
         var objName = $('#objName').val();
-        alert('o' + objName);
         var objLink = $('#objLink').val();
+        var objImgLink = $('#imageLink').val();
         var objTagVal = $('#objTags').val();
         var objTags = objTagVal.split(' ');
         var objPrice = $('#objPrice').val();
@@ -92,10 +96,10 @@
             function(snapshot) {
 
               data = snapshot.val();
-              alert(data);
               inDataBase = (data !== null);
               if(!inDataBase){
                  objDataRef.child(objName).set({ link: objLink,
+                                image:objImgLink,
                                 price:objPrice,
                                 tags: objTags});
             }

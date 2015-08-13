@@ -126,7 +126,9 @@
                   myUserRef.once("value", function(snapshot){
                     myData = snapshot.val();
                     var myLikes = myData.items;
+                    if(myLikes.indexOf(childKey) == -1){
                     myLikes.push(childKey);
+                  }
                      myUserRef.child('items').update(myLikes);
                       });
                   

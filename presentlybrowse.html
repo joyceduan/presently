@@ -165,7 +165,7 @@
 
         myUserRef = myDataRef.child(username);
         myItemRef = myUserRef.child('items');
-        myItemRef.update(objectName:1);
+        myItemRef.update({objectName:1});
         alert("all done");
       
        // userRef = myDataRef.child('Users');

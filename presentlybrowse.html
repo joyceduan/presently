@@ -102,40 +102,28 @@
         var varDict = getVarDict(url); 
         itemDataRef = myDataRef.child('Objects');
         itemDataRef.once("value", function(snapshot){
-        var cardGroup = document.getElementById('mainContainer');
-        var username = localStorage.getItem("username"); 
+        	var cardGroup = document.getElementById('mainContainer');
+		var username = localStorage.getItem("username"); 
 
-        snapshot.forEach(function(childSnapshot) {
-            childData = childSnapshot.val();
-            childKey = childSnapshot.key();
-            card = document.createElement("div");
-              card.setAttribute("class", "card");
-              var itemImage = document.createElement("img");
-              itemImage.setAttribute("src", childData.image);
-              itemImage.setAttribute("height", "300");
-              itemImage.setAttribute("width", "270");
-            card.appendChild(itemImage);
+        	snapshot.forEach(function(childSnapshot) {
+            		childData = childSnapshot.val();
+            		childKey = childSnapshot.key();
+            		card = document.createElement("div");
+              		card.setAttribute("class", "card");
+              		var itemImage = document.createElement("img");
+              		itemImage.setAttribute("src", childData.image);
+              		itemImage.setAttribute("height", "300");
+              		itemImage.setAttribute("width", "270");
+            		card.appendChild(itemImage);
 
-            var likeButton = document.createElement('span');
-              likeButton.setAttribute('class', 'right floated');
-              var likeicon = document.createElement('i');
-              likeicon.setAttribute('class', 'right floated like icon');
-              likeButton.appendChild(likeicon);
-              likeButton.addEventListener('click', function(){
-                  myUserRef = myDataRef.child('Users').child(username);
-                  myUserRef.once("value", function(snapshot){
-                    myData = snapshot.val();
-                    var myLikes = myData.items;
-                    if(myLikes.indexOf(childKey) == -1){
-                    myLikes.push(childKey);
-                  }
-                     myUserRef.child('items').update(myLikes);
-                      });
-                  
-  
-            });
-
-            var buyButton = document.createElement('a');
+            		var likeButton = document.createElement('span');
+              		likeButton.setAttribute('class', 'right floated');
+              		var likeicon = document.createElement('i');
+              		likeicon.setAttribute('class', 'right floated like icon');
+              		likeButton.appendChild(likeicon);
+              		likeButton.addEventListener('click', addToLike(childKey));
+              		
+              		 var buyButton = document.createElement('a');
               var buyicon = document.createElement('i');
               buyicon.setAttribute('class', 'right floated dollar icon');
               buyButton.appendChild(buyicon);
@@ -150,6 +138,9 @@
             card.appendChild(content);
             card.setAttribute("id", childData.name);
             cardGroup.appendChild(card);
+                });
+
+           
             //cardGroup.appendChild(document.createElement("br"));
             //generate unique key, (key) then add that as id
         });

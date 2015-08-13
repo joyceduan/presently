@@ -103,6 +103,7 @@
         itemDataRef = myDataRef.child('Objects');
         itemDataRef.once("value", function(snapshot){
         var cardGroup = document.getElementById('mainContainer');
+        var username = localStorage.getItem("username"); 
 
         snapshot.forEach(function(childSnapshot) {
             childData = childSnapshot.val();
@@ -114,17 +115,38 @@
               itemImage.setAttribute("height", "300");
               itemImage.setAttribute("width", "270");
             card.appendChild(itemImage);
+
             var likeButton = document.createElement('span');
               likeButton.setAttribute('class', 'right floated');
-                var likeicon = document.createElement('i');
-                likeicon.setAttribute('class', 'right floated like icon');
+              var likeicon = document.createElement('i');
+              likeicon.setAttribute('class', 'right floated like icon');
               likeButton.appendChild(likeicon);
-              likeButton.setAttribute('onClick', 'addtoLike()');
-        
+              likeButton.addEventListener('click', function(){
+                  myUserRef = myDataRef.child('Users').child(username);
+                  myUserRef.once("value", function(snapshot){
+                    myData = snapshot.val();
+                    var myLikes = myData.items;
+                    alert(myLikes);
+                    myLikes.push(childKey);
+                     myUserRef.child('items').update(myLikes);
+                      });
+                  
+              alert('ehllo');
+            });
+
+            var buyButton = document.createElement('a');
+              var buyicon = document.createElement('i');
+              buyicon.setAttribute('class', 'right floated dollar icon');
+              buyButton.appendChild(buyicon);
+              buyButton.setAttribute('href', childData.link);
+
             var content = document.createElement('div');
-            content.setAttribute('class', 'content');
-            content.appendChild(likeButton);
+              content.setAttribute('class', 'content');
+              content.appendChild(likeButton);
+              content.appendChild(buyButton);
+
             card.appendChild(content);
+            card.setAttribute("id", childData.name);
             cardGroup.appendChild(card);
             //cardGroup.appendChild(document.createElement("br"));
             //generate unique key, (key) then add that as id

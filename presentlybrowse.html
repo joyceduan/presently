@@ -121,7 +121,9 @@
               		var likeicon = document.createElement('i');
               		likeicon.setAttribute('class', 'right floated like icon');
               		likeButton.appendChild(likeicon);
-              		likeButton.addEventListener('click', addToLike(childKey));
+              		likeButton.addEventListener('click', function(){
+              			addToLike(childKey)
+              			});
               		
               		 var buyButton = document.createElement('a');
               var buyicon = document.createElement('i');

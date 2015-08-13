@@ -44,7 +44,7 @@
 		 	<div class = "six wide column">
 		 	<br><br><br>
 		 	<font color="white" face ="verdana" align = "center">
-		 <div class="ui large header" id = "giftsILike"><u>Gifts I Like:</u></font></div>
+		 <div class="ui link cards" id = "giftsILike"><u>Gifts I Like:</u></font></div>
 		 <br><br>
 		 <p id = "sameTagFriends"><font size="5"><b><u>People with similar personalities: </u></b></font></p>
 		 <br> <br>
@@ -97,15 +97,15 @@
     	var username = localStorage.getItem("username");
     	document.getElementById("displayUserName").innerHTML = username;
     	var userData;
-		myDataRef.once("value", function(snapshot){
+		myDataRef.once("value", function(snapshot){ //snapshot = all users
     			var data = snapshot.child(username);
     			userData = data.val();
     			pTags = userData.likes;
+    			myItems = userData.items;
    	        	console.log(userData);
     		 	//document.getElementById('personalityTags').innerHTML = "Personality Tags: " + userData.likes;
     		 	document.getElementById('personalityTags').style.color = '#FFFFFF'
     		 	document.getElementById('giftsILike').style.color = '#FFFFFF'
-    		 	document.getElementById('giftsILike').innerHTML += ('<br>' + userData.items);
     		 	if(userData.profilepicURL !== ""){
     		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	
     		 	}
@@ -121,9 +121,45 @@
     		 		tagLinks.appendChild(document.createTextNode(", "));
  					
     		 	}
-
     		 	document.getElementById("personalityTags").appendChild(tagLinks); 
     		 	document.getElementById("sameTagFriends").innerHTML += '<br></br>'
+
+    		 	var cardGroup = document.getElementById('giftsILike');
+    		 	itemDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Items');
+    		 	for( item in myItems){
+    		 		thisItemRef = myDataRef.child(item);
+
+                    thisItemRef.once("value", function(snapshot){
+                    	thisItemData = snapshot.val();
+                    	alert(thisItemData);
+                    	card = document.createElement("div");
+             		 	card.setAttribute("class", "card");
+              			var itemImage = document.createElement("img");
+              				itemImage.setAttribute("src", thisItemData.image);
+              				itemImage.setAttribute("height", "300");
+              				itemImage.setAttribute("width", "270");
+            			card.appendChild(itemImage);
+
+            			var likeButton = document.createElement('span');
+              				likeButton.setAttribute('class', 'right floated');
+              				var likeicon = document.createElement('i');
+              				likeicon.setAttribute('class', 'right floated like icon');
+              				likeButton.appendChild(likeicon);
+              				likeButton.addEventListener('click', function(){
+                  				var myUserRef = myDataRef.child(username);
+                 				myUserRef.once("value", function(snapshot){
+                    				var myData = snapshot.val();
+                   					var myLikes = myData.items;
+                    				myLikes.push(childKey);
+                     				myUserRef.child('items').update(myLikes);
+                     				 });
+                 			});
+                 		cardGroup.appendChild(card);
+                  
+                    	});
+					}
+
+    		 	
     		 	snapshot.forEach(function(childSnapshot) {
    
     	var key = childSnapshot.key(); // key = username
@@ -141,6 +177,59 @@
     	
     });
 		});
+
+	itemDataRef = myDataRef.child('Objects');
+        itemDataRef.once("value", function(snapshot){
+        
+        
+
+        snapshot.forEach(function(childSnapshot) {
+            childData = childSnapshot.val();
+            childKey = childSnapshot.key();
+            card = document.createElement("div");
+              card.setAttribute("class", "card");
+              var itemImage = document.createElement("img");
+              itemImage.setAttribute("src", childData.image);
+              itemImage.setAttribute("height", "300");
+              itemImage.setAttribute("width", "270");
+            card.appendChild(itemImage);
+
+            var likeButton = document.createElement('span');
+              likeButton.setAttribute('class', 'right floated');
+              var likeicon = document.createElement('i');
+              likeicon.setAttribute('class', 'right floated like icon');
+              likeButton.appendChild(likeicon);
+              likeButton.addEventListener('click', function(){
+                  myUserRef = myDataRef.child('Users').child(username);
+                  myUserRef.once("value", function(snapshot){
+                    myData = snapshot.val();
+                    var myLikes = myData.items;
+                    myLikes.push(childKey);
+                     myUserRef.child('items').update(myLikes);
+                      });
+                  
+  
+            });
+
+            var buyButton = document.createElement('a');
+              var buyicon = document.createElement('i');
+              buyicon.setAttribute('class', 'right floated dollar icon');
+              buyButton.appendChild(buyicon);
+              buyButton.setAttribute('href', childData.link);
+              buyButton.setAttribute('target', "_blank");
+
+            var content = document.createElement('div');
+              content.setAttribute('class', 'content');
+              content.appendChild(likeButton);
+              content.appendChild(buyButton);
+
+            card.appendChild(content);
+            card.setAttribute("id", childData.name);
+            cardGroup.appendChild(card);
+            //cardGroup.appendChild(document.createElement("br"));
+            //generate unique key, (key) then add that as id
+        });
+      });
 	
 		// alert('hello');
 		// var newDiv = document.createElement("img");

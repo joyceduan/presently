@@ -122,7 +122,7 @@
               		likeicon.setAttribute('class', 'right floated like icon');
               		likeButton.appendChild(likeicon);
               		likeButton.addEventListener('click', function(){
-              			addToLike(childKey);
+              			addToLike(childData,childKey,username);
               			});
               		
               		 var buyButton = document.createElement('a');
@@ -164,10 +164,7 @@
          return(varDict);
        }
   
-      function addtoLike(objectname){
-        //var objectName = document.getElementById('itemTitle').innerHTML;
-        //var objectPrice = document.getElementById('price').innerHTML;
-        //var objectLink =  $('#link').attr("href");
+      function addToLike(objectData, objectName, username){
         alert("Item Liked!");
 
        //  var myObjectRef = myDataRef.child('Objects');

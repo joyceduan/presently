@@ -126,12 +126,13 @@
 
     		 	var cardGroup = document.getElementById('giftsILike');
     		 	itemDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
-    		 	for( item in myItems){
-    		 		thisItemRef = itemDataRef.child(myItems[item]);
+    		 	snapshot.forEach(function(childSnapshot) {
+    		 		childObj = childSnapshot.key();
+    		 		childRank = childSnapshot.val();
+    		 		thisItemRef = itemDataRef.child(childObj);
 
                     thisItemRef.once("value", function(snapshot){
                     	thisItemData = snapshot.val();
-                    	alert(thisItemData);
                     	alert(snapshot.key());
                     	card = document.createElement("div");
              		 	card.setAttribute("class", "card");
@@ -158,6 +159,7 @@
                  		cardGroup.appendChild(card);
                   
                     	});
+    		 	});
 					}
 
     		 	

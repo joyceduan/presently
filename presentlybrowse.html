@@ -126,12 +126,11 @@
                   myUserRef.once("value", function(snapshot){
                     myData = snapshot.val();
                     var myLikes = myData.items;
-                    alert(myLikes);
                     myLikes.push(childKey);
                      myUserRef.child('items').update(myLikes);
                       });
                   
-              alert('ehllo');
+  
             });
 
             var buyButton = document.createElement('a');

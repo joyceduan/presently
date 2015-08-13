@@ -75,11 +75,11 @@
     		myTagsArray = meTags.split(' ');
 
     		var userRef = myDataRef.child("Users").child(username);
-    		var emptyArray  = new Array();
+    		var emtyArray  = new Array();
     		userRef.set({password:password, 
     			    	likes: myTagsArray,
-    				profilepicURL: pfpPath,
-    				items: emptyArray	
+    				    profilepicURL: pfpPath,
+    				    items:emtyArray	
     		});
 
     		localStorage.setItem("username", username);

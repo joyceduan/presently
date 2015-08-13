@@ -68,7 +68,6 @@
 
     	function makeUser()
     	{
-    		alert('YOSOUCK');
     		var username = $('#username').val();
     		username = username.replace(/\s/g, '');
     		var password = $('#password').val();
@@ -77,14 +76,13 @@
     		myTagsArray = meTags.split(' ');
 
     		var userRef = myDataRef.child("Users").child(username);
-    		var emtyArray  = new Array();
+    		var emptyArray  = ('hello friend').split(' ');
     		userRef.set({password:password, 
     			    	likes: myTagsArray,
     				    profilepicURL: pfpPath,
-    				    items:emtyArray	
+    				    items:emptyArray	
 
     		});
-    		alert('BRUGGG');
     		localStorage.setItem("username", username);
     		window.location.href ="presentlyprofile.html";
        	}

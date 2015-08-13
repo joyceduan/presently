@@ -151,7 +151,7 @@
                  				myUserRef.once("value", function(snapshot){
                     				var myData = snapshot.val();
                    					var myLikes = myData.items;
-                    				myLikes.push(childKey);
+                    				myLikes.unshift(childKey);
                      				myUserRef.child('items').update(myLikes);
                      				 });
                  			});

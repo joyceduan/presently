@@ -141,10 +141,6 @@
             card.setAttribute("id", childData.name);
             cardGroup.appendChild(card);
                 });
-
-           
-            //cardGroup.appendChild(document.createElement("br"));
-            //generate unique key, (key) then add that as id
        
       });
 
@@ -167,15 +163,10 @@
       function addToLike(objectData, objectName, username){
         alert("Item Liked!");
 
-       //  var myObjectRef = myDataRef.child('Objects');
-       //  var thisObjRef = myObjectRef.child(objectName);
-	      // var username = localStorage.getItem("username");
-
-       //   thisObjRef.set({
-       //        price: objectPrice,
-       //        link: objectLink,
-       //        tags: []
-       //        });
+        myUserRef = myDataRef.child(username);
+        myItemRef = myUserRef.child('items');
+        myItemRef.update(objectName:1);
+        alert("all done");
       
        // userRef = myDataRef.child('Users');
        // userRef.child(username).update({items:objectName});

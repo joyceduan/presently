@@ -66,22 +66,6 @@
 </div>
 <br><br><br><br><br>
 <div class="ui link cards" id = "mainContainer">
-    <!div class="content">
-      <!div class="header" id = "itemName">
-      <!div class="meta">
-        <!a href = "amazon.com" id = "itemPurchaseLink">
-      <!/div>
-      <!div class="description" id = "itemDescription">
-      
-      <!/div>
-    <!/div>
-    <!div class="extra content">
-      <!span class="right floated" id = "itemLikes">
-      <!i class="heart outline like icon" ></i>
-      
-    <!/span>
-    <!/div>
-  <!/div>
 </div>
 
 
@@ -99,50 +83,56 @@
      <script language="javascript" type="text/javascript">
       var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com');
         var url = document.URL;
-        var varDict = getVarDict(url); 
+        var varDict = getVarDict(url); //get tags 
         itemDataRef = myDataRef.child('Objects');
-        itemDataRef.once("value", function(snapshot){
-        	var cardGroup = document.getElementById('mainContainer');
-		var username = localStorage.getItem("username"); 
+        var username = localStorage.getItem("username");
 
-        	snapshot.forEach(function(childSnapshot) {
+        itemDataRef.once("value", function(snapshot){
+        	var cardGroup = document.getElementById('mainContainer'); 
+          snapshot.forEach(function(childSnapshot) {
             		childData = childSnapshot.val();
             		childKey = childSnapshot.key();
+
             		card = document.createElement("div");
-              		card.setAttribute("class", "card");
-              		var itemImage = document.createElement("img");
-              		itemImage.setAttribute("src", childData.image);
-              		itemImage.setAttribute("height", "300");
-              		itemImage.setAttribute("width", "270");
+              		  card.setAttribute("class", "card");
+              		  var itemImage = document.createElement("img");
+              		  itemImage.setAttribute("src", childData.image);
+              		  itemImage.setAttribute("height", "300");
+              		  itemImage.setAttribute("width", "270");
             		card.appendChild(itemImage);
 
             		var likeButton = document.createElement('span');
-              		likeButton.setAttribute('class', 'right floated');
-              		var likeicon = document.createElement('i');
-              		likeicon.setAttribute('class', 'right floated like icon');
-              		likeButton.appendChild(likeicon);
-              		likeButton.addEventListener('click', function(){
-              			addToLike(childData,childKey,username);
-              			});
+              		  likeButton.setAttribute('class', 'right floated');
+              		  var likeicon = document.createElement('i');
+              		  likeicon.setAttribute('class', 'right floated like icon');
+                    var likeId = childKey.replace(/\s/g, '');
+                    likeicon.setAttribute('id', likeId);
+                    alert(likeId);
+              		  likeButton.appendChild(likeicon);
+                    var cardId = likeId+'Card';
+              		  likeButton.addEventListener('click', function(){
+              			addToLike(childData,childKey,username, likeId, cardId);
+              	});
               		
-              		 var buyButton = document.createElement('a');
-              var buyicon = document.createElement('i');
-              buyicon.setAttribute('class', 'right floated dollar icon');
-              buyButton.appendChild(buyicon);
-              buyButton.setAttribute('href', childData.link);
-              buyButton.setAttribute('target', "_blank");
+              	var buyButton = document.createElement('a');
+                    var buyicon = document.createElement('i');
+                    buyicon.setAttribute('class', 'right floated dollar icon');
+                    buyButton.appendChild(buyicon);
+                    buyButton.setAttribute('href', childData.link);
+                    buyButton.setAttribute('target', "_blank");
 
-            var content = document.createElement('div');
-              content.setAttribute('class', 'content');
-              content.appendChild(likeButton);
-              content.appendChild(buyButton);
+                var content = document.createElement('div');
+                    content.setAttribute('class', 'content');
+                    content.appendChild(likeButton);
+                    content.appendChild(buyButton);
 
-            card.appendChild(content);
-            card.setAttribute("id", childData.name);
-            cardGroup.appendChild(card);
-                });
+                card.appendChild(content);
+                card.setAttribute("id", cardId);
+                alert(cardId);
+                cardGroup.appendChild(card);
+          });
        
-      });
+      }); //end function
 
         
       function getVarDict(url){
@@ -160,18 +150,14 @@
          return(varDict);
        }
   
-      function addToLike(objectData, objectName, username){
+      function addToLike(objectData, objectName, username, likeId, objectCardId){
         alert("Item Liked!");
-
-        myUserRef = myDataRef.child(username);
-        myItemRef = myUserRef.child('items');
-        myItemRef.update({objectName:1});
-        alert("all done");
-      
-       // userRef = myDataRef.child('Users');
-       // userRef.child(username).update({items:objectName});
-       // alert(objectName);
-
+        document.getElementById(likeId).style.color = "red";
+        myUserRef = myDataRef.child('Users').child(username);
+        myItemRef = myUserRef.child('items').child(objectName);
+        myItemRef.set(1);
+        //document.getElementById(objectCardId).remove();
+        
       }
       
       function goToAddPage(){

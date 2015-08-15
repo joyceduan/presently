@@ -131,17 +131,16 @@
     		 		childRank = childSnapshot.val();
     		 		thisItemRef = itemDataRef.child(childObj);
 
-                    thisItemRef.once("value", function(snapshot){
-                    	thisItemData = snapshot.val();
-                    	alert(snapshot.key());
-                    	card = document.createElement("div");
-             		 	card.setAttribute("class", "card");
+            thisItemRef.once("value", function(snapshot){
+                  thisItemData = snapshot.val();
+                  alert(snapshot.key());
+                  card = document.createElement("div");
+             		 	  card.setAttribute("class", "card");
               			var itemImage = document.createElement("img");
-              				itemImage.setAttribute("src", thisItemData.image);
-              				itemImage.setAttribute("height", "300");
-              				itemImage.setAttribute("width", "270");
+              			itemImage.setAttribute("src", thisItemData.image);
+              			itemImage.setAttribute("height", "300");
+              			itemImage.setAttribute("width", "270");
             			card.appendChild(itemImage);
-
             			var likeButton = document.createElement('span');
               				likeButton.setAttribute('class', 'right floated');
               				var likeicon = document.createElement('i');
@@ -149,18 +148,17 @@
               				likeButton.appendChild(likeicon);
               				likeButton.addEventListener('click', function(){
                   				var myUserRef = myDataRef.child(username);
-                 				myUserRef.once("value", function(snapshot){
-                    				var myData = snapshot.val();
-                   					var myLikes = myData.items;
-                    				myLikes.unshift(childKey);
-                     				myUserRef.child('items').update(myLikes);
+                 				   myUserRef.once("value", function(snapshot){
+                    				  var myData = snapshot.val();
+                   					  var myLikes = myData.items;
+                    				  myLikes.unshift(childKey);
+                     				  myUserRef.child('items').update(myLikes);
                      				 });
                  			});
-                 		cardGroup.appendChild(card);
+                 	cardGroup.appendChild(card);
                   
-                    	});
+            });
     		 	});
-					}
 
     		 	
     		 	snapshot.forEach(function(childSnapshot) {

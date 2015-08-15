@@ -59,7 +59,6 @@
     </body>
     <script language="javascript" type="text/javascript">
     	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/');
-    	alert('hello');
     	
     	function logIn()
     	{
@@ -81,8 +80,7 @@
     			    	likes: myTagsArray,
     				    profilepicURL: pfpPath,
     				    items: 'Items'	
-
-    		});
+    					});
     		localStorage.setItem("username", username);
     		window.location.href ="presentlyprofile.html";
        	}

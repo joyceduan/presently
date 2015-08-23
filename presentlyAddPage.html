@@ -20,7 +20,7 @@
     </head>
     <body>
       <br><br>
-      <h1 class="ui grey header">Add an Item to the Presently Database:</h1>
+      <h1 class="ui inverted header">Add an Item to the Presently Database:</h1>
       <br><br>
       <div class="ui input" >
         <input type="text" placeholder="Object Name:" id = "objName">
@@ -50,14 +50,15 @@
         </a>
       </div>
       <br><br>
-      <div class="ui green animated fade button" tabindex="0" onClick = "addItem()">
+      <div class = "ui left action input">
+        <input  type="text" placeholder= "Auto-Fill from Amazon link" value = ""id = "amazonLink">
+      </div>
+      <br><br>
+      <div class="ui inverted button" tabindex="0" onClick = "addItem()">
         <div class="visible content">Add New Item</div>
-        <div class="hidden content">
-         Submit
-        </div>
       </div>
       <br><br><br><br>
-      <a class="ui button" href = "presentlybrowse.html">
+      <a class="ui purple button" href = "presentlybrowse.html">
         Back to Browsing
       </button>
 
@@ -88,6 +89,7 @@
       
         var inDataBase = false;
         var objName = $('#objName').val();
+        var objKey = objName.replace(/\s/g, '');
         var objLink = $('#objLink').val();
         var objImgLink = $('#imageLink').val();
         var objTagVal = $('#objTags').val();
@@ -100,10 +102,11 @@
               data = snapshot.val();
               inDataBase = (data !== null);
               if(!inDataBase){
-                 objDataRef.child(objName).set({ link: objLink,
+                 objDataRef.child(objKey).set({ link: objLink,
                                 image:objImgLink,
                                 price:objPrice,
-                                tags: objTags});
+                                tags: objTags
+                                name: objName});
             }
           }
           );

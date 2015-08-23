@@ -16,22 +16,12 @@
         <link rel="stylesheet" type="text/css" href="semantic/out/semantic.css">    
         <link rel="stylesheet" type="text/css" href="semantic/out/semantic.min.css">
         <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-    </head>
-    <body>
- 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="/semantic/out/semantic.js"></script>
-		<script src="/semantic/out/semantic.min.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="/semantic/out/semantic.css">	
-		<link rel="stylesheet" type="text/css" href="/semantic/out/semantic.min.css">
-		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 	</head>
 
-  <div class="ui grid">
-      <div class="sixteen wide column"></div>
-      <div class="fifteen wide column"></div>
-      <img class="ui medium rounded image" src="presently.png" style="width:100px; height:100px">
-    </div>
+  
+    <body>
+    <br><br>
 		<div class="ui pointing menu">
         <a class = "item" href = "presentlyprofile.html" >
           Profile
@@ -42,13 +32,11 @@
         <a class="item" href = "presentlyevents.html">
           Events
         </a>
-        <a class="item"  href = "presentlysignup.html" >
-          Make New Profile
-        </a>
         <a class="ui item" href = "presentlylogin.html" >
           Logout
         </a>
-      </div>
+    </div>
+    <!div class="ui grid">
       <div class="ui fluid category search">
   <div class="ui icon input">
     <input class="prompt" type="text" placeholder="Search animals...">
@@ -151,13 +139,13 @@
        }
   
       function addToLike(objectData, objectName, username, likeId, objectCardId){
-        alert("Item Liked!");
+       
         document.getElementById(likeId).style.color = "red";
         myUserRef = myDataRef.child('Users').child(username);
         myItemRef = myUserRef.child('items').child(objectName);
         myItemRef.set(1);
         //document.getElementById(objectCardId).remove();
-        
+         alert("Item Liked!");
       }
       
       function goToAddPage(){

@@ -16,74 +16,87 @@
 		<link rel="stylesheet" type="text/css" href="semantic/out/semantic.min.css">
 		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 	</head>
+
+
+	<body>
+    
+    <br><br>
+    <div class="ui pointing menu">
+        <a class = "active item" href = "presentlyprofile.html" >
+          Profile
+        </a>
+        <a class="item" href = "presentlybrowse.html"  >
+          Browse
+        </a>
+        <a class="item" href = "presentlyevents.html">
+          Events
+        </a>
+        <a class="ui item" href = "presentlylogin.html" >
+          Logout
+        </a>
+    </div>
+
 		<div class="ui grid">
-			<div class="sixteen wide column"></div>
-			<div class="fifteen wide column"></div>
-		</div>
-		
-		<div class="ui pointing menu">
-			  <a class = "item" href = "presentlyprofile.html" >
-			    Profile
-			  </a>
-			  <a class="item" href = "presentlybrowse.html"  >
-			    Browse
-			  </a>
-			  <a class="active item" href = "presentlyevents.html">
-			    Events
-			  </a>
-        		<a class="item"  href = "presentlysignup.html" >
-          		Make New Profile
-        		</a>
-			  <a class="ui item" href = "presentlylogin.html" >
-			  	Logout
-			  </a>
-		</div>
-			<body>
-			<div class="ui grid">
-		 
-		 	<div class = "two wide column"></div>
-		 	<div class = "six wide column">
-		 	<br><br><br>
-		 	<font color="white" face ="verdana" align = "center">
-		 <div class="ui link cards" id = "giftsILike"><u>Gifts I Like:</u></font></div>
-		 <br><br>
-		 <p id = "sameTagFriends"><font size="5"><b><u>People with similar personalities: </u></b></font></p>
-		 <br> <br>
-		 <div class = "two wide column"></div>
-		 <div class="ui large header" id = "personalityTags"><b><u>Personality Tags:</u></b></div>
-		</font>
-		</div>
+      <div class = "sixteen wide column"></div>
+      <div class = "sixteen wide column"></div>
 
-		<div class="ui card">
+      <div class = "one wide column"></div>
+      <div class = "three wide column">
+          <div class="ui card">
+             <div class="content">
+               <a class="header" id = "displayUserName" align = "center">
+                User 
+               </a>
+                <img class = "ui medium image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic">
+         
+                <!a class="header" id = "displayUserName">User </a>
+                <div class="meta">
+                <!span class="date"><!/span>
+                </div>
+              <!div class="extra content">
+              <!a>
+                <!i class="user icon"><!/i>
+            
+              <!/a>
+              <!/div>
+        </div> 
+        </div>
+    </div>
 
-   		<img class = "ui medium circular image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic">
-  		<div class="content">
-  		<a class="header" id = "displayUserName">User </a>
-    	<div class="meta">
-      	<span class="date">Joined in 2015</span>
-  		</div>
-  		<div class="extra content">
-    		<a>
-      		<i class="user icon"></i>
-      		22 Friends
-    		</a>
-    	</div>
-		</div> 
-		</div>
-		<div class="six wide column"></div>
-		<div class="one wide column"></div>
-		<div class="sixteen wide column"></div>
-		<div class="one wide column"></div>
-		
-		<div class="ten wide column"></div>
-		<div class="four wide column"></div>
-		
-		<div class="one wide column"></div>
-		<div class="four wide column"></div>
+    <div class = "one wide column"></div>
+     <div class = " ui card">
+		<div class = "ten wide column">
+      
+		 	  <font color = "black" face ="verdana" size = "4">
+		    <br>
+		    <p id = "sameTagFriends">Similar Friends: </p>
+		      <br> <br><br><br>
+        <p id = "personalityTags">Personality Tags:</p>
+      </font>
+    </div>
+  </div>
+   <div class = "one wide column"></div>
+   <!div class = "four wide column"><!/div>
+
+
+  <div class = "sixteen wide column"></div>
+
+  <div class = "sixteen wide column"></div>
+
+  <div class = "one wide column"></div>
+  <div class = "ten wide column">
+    <font color="white" face ="verdana" size = "5"><p>Gifts I Like: </p></font>
+    <div class="ui link cards" id = "giftsILike"></div>
+  </div>
+   <div class = "one wide column"></div>
+  <div class = "four wide column"></div>
+</div>
+
+  </body>
 		
 		
     
-    	<style type="text/css">
+  <style type="text/css">
 			body {
 			background: coral;
 			font-color: white;
@@ -92,92 +105,114 @@
 		}
 
 		</style>
-    </body>
+
     <script language="javascript" type="text/javascript">
-    	var myDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
-    	var username = localStorage.getItem("username");
+
+    	var DataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
+      var username = localStorage.getItem("username");
+      var myDataRef = DataRef.child(username);
     	document.getElementById("displayUserName").innerHTML = username;
-    	var userData;
-		myDataRef.once("value", function(snapshot){ //snapshot = all users
-    			var data = snapshot.child(username);
-    			userData = data.val();
-    			pTags = userData.likes;
-    			myItems = userData.items;
-   	        	console.log(userData);
+    
+		  myDataRef.once("value", function(snapshot){ //snapshot = all users
+    			var myName = snapshot.key();
+    			var myUserData = snapshot.val();
+    			var pTags = myUserData.likes;
+    			var myItems = snapshot.child('items');
+   	      console.log(myUserData);
     		 	//document.getElementById('personalityTags').innerHTML = "Personality Tags: " + userData.likes;
     		 	document.getElementById('personalityTags').style.color = '#FFFFFF'
     		 	document.getElementById('giftsILike').style.color = '#FFFFFF'
-    		 	if(userData.profilepicURL !== ""){
-    		 		document.getElementById("profilepic").src = userData.profilepicURL;    		 	
+
+    		 	if(myUserData.profilepicURL !== ""){
+    		 		document.getElementById("profilepic").src = myUserData.profilepicURL;  		 	
     		 	}
 
     		 	var tagLinks = document.createElement("p");
-    		 	for (item in userData.likes){
+          //replace with for each
+    		 	for (item in myUserData.likes){ //link tags to browse page eventually
     		        tag = pTags[item];
-    		 		var x = document.createElement("a");
-    		 		x.innerHTML = tag;
-    		 		browsePage = 'presentlybrowse.html?tag='+tag;
-    		 		x.setAttribute("href", browsePage);
-    		 		tagLinks.appendChild(x);
-    		 		tagLinks.appendChild(document.createTextNode(", "));
- 					
-    		 	}
-    		 	document.getElementById("personalityTags").appendChild(tagLinks); 
-    		 	document.getElementById("sameTagFriends").innerHTML += '<br></br>'
-
-    		 	var cardGroup = document.getElementById('giftsILike');
-    		 	itemDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
-    		 	snapshot.forEach(function(childSnapshot) {
-    		 		childObj = childSnapshot.key();
-    		 		childRank = childSnapshot.val();
-    		 		thisItemRef = itemDataRef.child(childObj);
-
-            thisItemRef.once("value", function(snapshot){
-                  thisItemData = snapshot.val();
-                  alert(snapshot.key());
-                  card = document.createElement("div");
-             		 	  card.setAttribute("class", "card");
-              			var itemImage = document.createElement("img");
-              			itemImage.setAttribute("src", thisItemData.image);
-              			itemImage.setAttribute("height", "300");
-              			itemImage.setAttribute("width", "270");
-            			card.appendChild(itemImage);
-            			var likeButton = document.createElement('span');
-              				likeButton.setAttribute('class', 'right floated');
-              				var likeicon = document.createElement('i');
-              				likeicon.setAttribute('class', 'right floated like icon');
-              				likeButton.appendChild(likeicon);
-              				likeButton.addEventListener('click', function(){
-                  				var myUserRef = myDataRef.child(username);
-                 				   myUserRef.once("value", function(snapshot){
-                    				  var myData = snapshot.val();
-                   					  var myLikes = myData.items;
-                    				  myLikes.unshift(childKey);
-                     				  myUserRef.child('items').update(myLikes);
-                     				 });
-                 			});
-                 	cardGroup.appendChild(card);
-                  
-            });
-    		 	});
+    		 		    var x = document.createElement("a");
+    		 		    x.innerHTML = tag;
+    		 		    browsePage = 'presentlybrowse.html?tag='+tag;
+    		 		    x.setAttribute("href", browsePage);
+    		 		   tagLinks.appendChild(x);
+    		 		   tagLinks.appendChild(document.createTextNode(", "));
+                document.getElementById("personalityTags").appendChild(tagLinks); 
+               document.getElementById("sameTagFriends").innerHTML += '<br></br>'
+ 					    }
+         });
 
     		 	
-    		 	snapshot.forEach(function(childSnapshot) {
+
+    		 	var cardGroup = document.getElementById('giftsILike');
+          myItems = myDataRef.child('items');
+
+          myItems.once("value", function(snapshot){
+            snapshot.forEach(function(childSnapshot) {
+              itemName = childSnapshot.key();
+              itemRank = childSnapshot.val();
+              thisItemRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects/'+itemName);
+              thisItemRef.once("value", function(snapshot){
+                  thisItemData = snapshot.val();
+                  thisItemName = snapshot.key();
+                  card = document.createElement("div");
+                    card.setAttribute("class", "card");
+                    var itemImage = document.createElement("img");
+                    itemImage.setAttribute("src", thisItemData.image);
+                    itemImage.setAttribute("height", "150");
+                    itemImage.setAttribute("width", "150");
+                  card.appendChild(itemImage);
+                  var likeButton = document.createElement('span');
+                      likeButton.setAttribute('class', 'right floated');
+                      var likeicon = document.createElement('i');
+                      likeicon.style.color = "grey";
+                      likeicon.setAttribute('class', 'right floated like icon');
+                      likeButton.appendChild(likeicon);
+                      likeButton.addEventListener('click', function(){
+                          var myUserRef = myDataRef.child(username);
+                           myUserRef.once("value", function(snapshot){
+                              var myData = snapshot.val();
+                              var myLikes = myData.items;
+                              myLikes.update(childKey);
+                              
+                             });
+                      });
+                  var buyButton = document.createElement('a');
+                    var buyicon = document.createElement('i');
+                    buyicon.setAttribute('class', 'right floated dollar icon');
+                    buyButton.appendChild(buyicon);
+                    buyButton.setAttribute('href', thisItemData.link);
+                    buyButton.setAttribute('target', "_blank");
+                  var content = document.createElement('div');
+                  content.setAttribute('class', 'content');
+                  content.appendChild(likeButton);
+                  content.appendChild(buyButton);
+                  card.appendChild(content);
+                  cardGroup.appendChild(card);
+                  
+            });
+          });
+     });
+
+    DataRef.once("value", function(snapshot){
+      snapshot.forEach(function(childSnapshot) {
    
-    	var key = childSnapshot.key(); // key = username
-    	var childData = childSnapshot.val();
-    	var childLikes = childData.likes;
-    	var added = [];
+      var key = childSnapshot.key(); // key = username
+      var childData = childSnapshot.val();
+      var childLikes = childSnapshot.child('likes');
+      var added = [];
   
-    	for(i = 0; i < childLikes.length; i++){
-    		var theirLike = childLikes[i];
-    		if(pTags.indexOf(theirLike) != -1 && key != username && added.indexOf(key) == -1){
-    			added.push(key);
-    			document.getElementById("sameTagFriends").innerHTML += ('<b>' + key );
-    		}
-    	}
-    	
+      for(i = 0; i < childLikes.length; i++){
+        var theirLike = childLikes[i];
+        if(pTags.indexOf(theirLike) != -1 && key != username && added.indexOf(key) == -1){
+          added.push(key);
+          document.getElementById("sameTagFriends").innerHTML += ('<b>' + key );
+        }
+      }
+      
     });
+
+    		 	
 		});
 
 	itemDataRef = myDataRef.child('Objects');

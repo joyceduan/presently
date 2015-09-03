@@ -139,10 +139,9 @@
        }
   
       function addToLike(objectData, objectName, username, likeId, objectCardId){
-       
         document.getElementById(likeId).style.color = "red";
         myUserRef = myDataRef.child('Users').child(username);
-        myItemRef = myUserRef.child('items').child(objectName);
+        myItemRef = myUserRef.child('items').child(likeId);
         myItemRef.set(1);
         //document.getElementById(objectCardId).remove();
          alert("Item Liked!");

@@ -86,7 +86,6 @@
       var objDataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Objects');
       
       function addItem(){
-      
         var inDataBase = false;
         var objName = $('#objName').val();
         var objKey = objName.replace(/\s/g, '');
@@ -105,7 +104,7 @@
                  objDataRef.child(objKey).set({ link: objLink,
                                 image:objImgLink,
                                 price:objPrice,
-                                tags: objTags
+                                tags: objTags,
                                 name: objName});
             }
           }

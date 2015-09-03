@@ -22,7 +22,7 @@
     
     <br><br>
     <div class="ui pointing menu">
-        <a class = "active item" href = "presentlyprofile.html" >
+        <a  id = "active" class = "active item" href = "presentlyprofile.html" >
           Profile
         </a>
         <a class="item" href = "presentlybrowse.html"  >
@@ -42,25 +42,23 @@
 
       <div class = "one wide column"></div>
       <div class = "three wide column">
+          
           <div class="ui card">
              <div class="content">
                <a class="header" id = "displayUserName" align = "center">
                 User 
                </a>
-                <img class = "ui medium image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png" id = "profilepic">
-         
-                <!a class="header" id = "displayUserName">User </a>
+                <img class = "ui medium image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png"                  id = "profilepic">
                 <div class="meta">
-                <!span class="date"><!/span>
+                <span class="date"></span>
                 </div>
-              <!div class="extra content">
-              <!a>
-                <!i class="user icon"><!/i>
-            
-              <!/a>
-              <!/div>
+              </div>
+              <div class="extra content">
+              <a>
+                <i class="user icon" onClick = "showFriends()">Friends</i>
+              </a>
+              </div>
         </div> 
-        </div>
     </div>
 
     <div class = "one wide column"></div>
@@ -92,6 +90,19 @@
   <div class = "four wide column"></div>
 </div>
 
+<div class="ui modal" id = "modal" >
+    <font color = black size = "3"> 
+  <i class="close icon"></i>
+        <br><br>
+    <div class="header" align = "center">
+    Friends
+  </div>
+   <br>
+  <div class = "content" id = "friendLinks" align = "center"> </div>
+        <br><br>
+    </font>
+</div>
+    
   </body>
 		
 		
@@ -107,9 +118,56 @@
 		</style>
 
     <script language="javascript" type="text/javascript">
+        varDict = getVarDict(document.URL);
+        alert(varDict);
+       
+      if(Object.keys(varDict).indexOf('user') > -1){
+          alert('hi');
+          var username = varDict['user'];
+          var activelink = document.getElementById('active');
+        activelink.setAttribute('class','item');
+      }
+        else{
+           var username = localStorage.getItem("username");
+            alert(username);
+        }
+      function getVarDict(url){
+        var start = url.indexOf('?');
+        var varDict = {};
+        var urlVarString = url.substring(start + 1, url.length);
+        var varPairs = urlVarString.split('&');
+        for(x = 0; x < varPairs.length; x++){
+          str = varPairs[x];
+          pairArray = str.split('=');
+          key = pairArray[0];
+          value = pairArray[1];
+          varDict[key] = value;
+         }
+         return(varDict);
+       }     
+            
+        function showFriends(){
+            var DataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
+            var userRef= DataRef.child(username);
+            var friendLinks = document.getElementById('friendLinks');
+
+            var userFriends = userRef.child("friends");
+            userFriends.once("value", function(snapshot){ 
+                snapshot.forEach(function(childSnapshot){
+                    var friend = childSnapshot.key();
+                    var thisLink = document.createElement('a');
+                        thisLink.innerHTML = friend;
+                        thisLink.setAttribute("href", "presentlyprofile.html?user="+friend);
+                    friendLinks.appendChild(thisLink);
+                    friendLinks.appendChild(document.createElement('br'));
+                    friendLinks.appendChild(document.createElement('br'));
+                }); 
+            });
+            $('.ui.modal')
+            .modal('show'); 
+        }
 
     	var DataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
-      var username = localStorage.getItem("username");
       var myDataRef = DataRef.child(username);
     	document.getElementById("displayUserName").innerHTML = username;
     
@@ -217,15 +275,12 @@
 
 	itemDataRef = myDataRef.child('Objects');
         itemDataRef.once("value", function(snapshot){
-        
-        
-
-        snapshot.forEach(function(childSnapshot) {
+         snapshot.forEach(function(childSnapshot) {
             childData = childSnapshot.val();
             childKey = childSnapshot.key();
             card = document.createElement("div");
               card.setAttribute("class", "card");
-              var itemImage = document.createElement("img");
+            var itemImage = document.createElement("img");
               itemImage.setAttribute("src", childData.image);
               itemImage.setAttribute("height", "60");
               itemImage.setAttribute("width", "60");

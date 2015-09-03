@@ -43,7 +43,7 @@
       <div class = "one wide column"></div>
       <div class = "three wide column">
           
-          <div class="ui card">
+          <div class="ui card" id = "userCard">
              <div class="content">
                <a class="header" id = "displayUserName" align = "center">
                 User 
@@ -58,6 +58,10 @@
                 <i class="user icon" onClick = "showFriends()">Friends</i>
               </a>
               </div>
+              <button class="ui labeled icon button" id = "addButton" onClick = "addFriend()">
+        <i class="add icon"></i>
+                    Add Friend
+            </button>
         </div> 
     </div>
 
@@ -119,15 +123,25 @@
 
     <script language="javascript" type="text/javascript">
         varDict = getVarDict(document.URL);
-       
+      var myUsername = localStorage.getItem("username");
+      var username = '';   
       if(Object.keys(varDict).indexOf('user') > -1){
           var username = varDict['user'];
           var activelink = document.getElementById('active');
         activelink.setAttribute('class','item');
+          
+          
+          
+          
       }
         else{
-           var username = localStorage.getItem("username");
+            var addButton = document.getElementById('addButton');
+            addButton.setAttribute('class','ui disabled button');
         }
+        
+    if(username == ''){
+        username = myUsername;
+    }
       function getVarDict(url){
         var start = url.indexOf('?');
         var varDict = {};
@@ -141,7 +155,31 @@
           varDict[key] = value;
          }
          return(varDict);
-       }     
+       }  
+        
+    function addFriend(){
+        alert('friend added');
+        var myUserRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users/'+ myUsername);
+        var myFriendsRef = myUserRef.child('friends');
+        var addButton = document.getElementById('addButton');
+         myFriendsRef.child(username).once('value', 
+    	    	function(snapshot) {
+    	    		data = snapshot.val();
+					var exists = (data !== null);
+    				if(exists){
+                        
+                    }
+             else{
+                 myFriendsRef.child(username).set(1);
+                 addButton.innerHTML = "Friend Added";
+             }
+              
+              addButton.setAttribute('class','ui disabled button');
+             
+         });
+       
+    }
+     
             
         function showFriends(){
             var DataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
@@ -280,7 +318,7 @@
             var itemImage = document.createElement("img");
               itemImage.setAttribute("src", childData.image);
               itemImage.setAttribute("height", "60");
-              itemImage.setAttribute("width", "60");
+              itemImage.setAttribute("width", "50");
             card.appendChild(itemImage);
 
             var likeButton = document.createElement('span');

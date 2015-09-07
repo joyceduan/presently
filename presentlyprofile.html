@@ -44,22 +44,22 @@
       <div class = "three wide column">
           
           <div class="ui card" id = "userCard">
+              <div class = "image">
+              <img class = "ui medium image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png"                  id = "profilepic">
+              </div>
              <div class="content">
                <a class="header" id = "displayUserName" align = "center">
                 User 
                </a>
-                <img class = "ui medium image" src= "http://skiuwi.com/Skiuwi/img/GenericUser.png"                  id = "profilepic">
-                <div class="meta">
-                <span class="date"></span>
-                </div>
               </div>
-              <div class="extra content">
+              <div class="extra content" align = "center">
               <a>
-                <i class="user icon" onClick = "showFriends()">Friends</i>
+                  <i class="user icon" onClick = "showFriends()"></i>
+                 Friends
               </a>
               </div>
               <button class="ui labeled icon button" id = "addButton" onClick = "addFriend()">
-        <i class="add icon"></i>
+        <i class="add icon" id = "addIcon"></i>
                     Add Friend
             </button>
         </div> 
@@ -78,9 +78,6 @@
     </div>
   </div>
    <div class = "one wide column"></div>
-   <!div class = "four wide column"><!/div>
-
-
   <div class = "sixteen wide column"></div>
 
   <div class = "sixteen wide column"></div>
@@ -122,26 +119,43 @@
 		</style>
 
     <script language="javascript" type="text/javascript">
-        varDict = getVarDict(document.URL);
+      varDict = getVarDict(document.URL);
       var myUsername = localStorage.getItem("username");
       var username = '';   
       if(Object.keys(varDict).indexOf('user') > -1){
           var username = varDict['user'];
           var activelink = document.getElementById('active');
         activelink.setAttribute('class','item');
-          
-          
-          
-          
       }
         else{
             var addButton = document.getElementById('addButton');
             addButton.setAttribute('class','ui disabled button');
+            addIcon = document.getElementById('addIcon');
+            
         }
         
     if(username == ''){
         username = myUsername;
     }
+    myFriendRef =  new Firebase('https://luminous-torch-1254.firebaseio.com/Users/'+ myUsername+'/friends');
+    oneFriend = myFriendRef.child(username);
+    oneFriend.once('value', 
+    	    	      function(snapshot) {
+    	    		     data = snapshot.val();
+					     var exists = (data !== null);
+    				     if(exists){
+                             var addButton = document.getElementById('addButton');
+                                addButton.setAttribute('class','ui disabled button');
+                                addIcon = document.getElementById('addIcon');
+                                addButton.removeChild(addIcon);
+                             var checkIcon = document.createElement('i');
+                                checkIcon.setAttribute('class','checkmark icon');
+                             addButton.innerHTML = 'Friends &nbsp';
+                             addButton.appendChild(checkIcon);
+                                
+                         }
+                    });
+    
       function getVarDict(url){
         var start = url.indexOf('?');
         var varDict = {};
@@ -185,7 +199,6 @@
             var DataRef = new Firebase('https://luminous-torch-1254.firebaseio.com/Users');
             var userRef= DataRef.child(username);
             var friendLinks = document.getElementById('friendLinks');
-
             var userFriends = userRef.child("friends");
             userFriends.once("value", function(snapshot){ 
                 snapshot.forEach(function(childSnapshot){

@@ -90,13 +90,23 @@
               		  itemImage.setAttribute("height", "300");
               		  itemImage.setAttribute("width", "270");
             		card.appendChild(itemImage);
-
+                    
             		var likeButton = document.createElement('span');
               		  likeButton.setAttribute('class', 'right floated');
               		  var likeicon = document.createElement('i');
               		  likeicon.setAttribute('class', 'right floated like icon');
                     var likeId = childKey.replace(/\s/g, '');
                     likeicon.setAttribute('id', likeId);
+                    myItemsRef =  myDataRef.child('Users').child(username).child('items').child(likeId);
+              //likeId is access key
+                    myItemsRef.once('value', 
+    	    	      function(snapshot) {
+    	    		     data = snapshot.val();
+					     var exists = (data !== null);
+    				     if(exists){
+                             likeicon.style.color = "red";
+                         }
+                    });
               		  likeButton.appendChild(likeicon);
                     var cardId = likeId+'Card';
               		  likeButton.addEventListener('click', function(){
@@ -139,12 +149,19 @@
        }
   
       function addToLike(objectData, objectName, username, likeId, objectCardId){
-        document.getElementById(likeId).style.color = "red";
         myUserRef = myDataRef.child('Users').child(username);
         myItemRef = myUserRef.child('items').child(likeId);
-        myItemRef.set(1);
-        //document.getElementById(objectCardId).remove();
-         alert("Item Liked!");
+        myItemRef.once('value', 
+    	    	      function(snapshot) {
+    	    		     data = snapshot.val();
+					     var exists = (data !== null);
+    				     if(!exists){
+                             myItemRef.set(1);
+                             document.getElementById(likeId).style.color = "red";
+                              alert("Item Liked!");
+                         }
+                    });
+       
       }
       
       function goToAddPage(){
